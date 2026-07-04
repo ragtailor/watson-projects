@@ -33,5 +33,14 @@ class FakerOrchestrator:
             response.raise_for_status()
             return response.json()["response"]
 
+    async def embed(self, prompt: str) -> list[float]:
+        async with httpx.AsyncClient(timeout=self.timeout) as client:
+            response = await client.post(
+                f"{self.base_url}/api/embeddings",
+                json={"model": self.model, "prompt": prompt},
+            )
+            response.raise_for_status()
+            return response.json()["embedding"]
+
 
 faker_orchestrator = FakerOrchestrator()

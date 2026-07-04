@@ -26,6 +26,7 @@ class MaryMailReceiveQuery:
     to: str
     preview: str
     message_id: str
+    embedding: list[float]
 
 
 @dataclass(frozen=True)

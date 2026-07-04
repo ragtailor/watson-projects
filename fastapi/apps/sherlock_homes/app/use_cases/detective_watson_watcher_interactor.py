@@ -17,3 +17,6 @@ class WatsonWatcherInteractor(WatsonWatcherUseCase):
             id=schema.id,
             name=schema.name
         ))
+
+    async def filter_stop_word(self):
+        '''비속어 필터링 하는 모델'''   

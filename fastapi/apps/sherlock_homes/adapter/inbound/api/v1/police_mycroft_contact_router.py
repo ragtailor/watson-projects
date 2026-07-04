@@ -6,9 +6,9 @@ from fastapi import APIRouter, Depends, File, HTTPException, UploadFile
 from sherlock_homes.adapter.inbound.api.schemas.police_mycroft_libraraian_schema import (
     MycroftContactSchema, ContactSchema, ContactUploadResultSchema,
 )
-from sherlock_homes.app.dtos.police_mycroft_libraraian_dto import MycroftContactResponse
-from sherlock_homes.app.ports.input.police_mycroft_libraraian_use_case import MycroftContactUseCase
-from sherlock_homes.dependencies.police_mycroft_contact_provider import get_mycroft_libraraian_use_case
+from sherlock_homes.app.dtos.police_mycroft_contact_dto import MycroftContactResponse
+from sherlock_homes.app.ports.input.police_mycroft_contact_use_case import MycroftContactUseCase
+from sherlock_homes.dependencies.police_mycroft_contact_provider import get_mycroft_contact_use_case
 
 '''
 마이크로프트 홈즈 (Mycroft)
@@ -22,7 +22,7 @@ mycroft_juso_router = APIRouter(prefix="/mycroft", tags=["mycroft"])
 
 @mycroft_juso_router.get("/myself")
 async def introduce_myself(
-    mycroft: MycroftContactUseCase = Depends(get_mycroft_libraraian_use_case)
+    mycroft: MycroftContactUseCase = Depends(get_mycroft_contact_use_case)
 ) -> MycroftContactResponse:
     return await mycroft.introduce_myself(
         MycroftContactSchema(
@@ -35,7 +35,7 @@ async def introduce_myself(
 @mycroft_juso_router.post("/upload", response_model=ContactUploadResultSchema, summary="Google 주소록 CSV 업로드")
 async def upload_contacts(
     file: UploadFile = File(...),
-    mycroft: MycroftContactUseCase = Depends(get_mycroft_libraraian_use_case),
+    mycroft: MycroftContactUseCase = Depends(get_mycroft_contact_use_case),
 ):
     contacts = _parse_csv((await file.read()).decode("utf-8", errors="replace"))
     result = await mycroft.upload_contacts(contacts)

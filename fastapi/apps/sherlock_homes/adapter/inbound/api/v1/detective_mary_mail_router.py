@@ -32,5 +32,6 @@ async def receive_mail(
     schema: MaryMailReceiveSchema,
     mary: MaryMailUseCase = Depends(get_mary_mail_use_case)
 ) -> MaryMailReceiveResponse:
-    
+    # 여기에 들어오면 로그를 작성해줘.
+    # 여기에 들어오면 텔레그램으로 전송해줘.
     return await mary.receive_mail(schema)
