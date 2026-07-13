@@ -32,18 +32,6 @@ services:
       - redis
       - neo4j
 
-  # Next.js 프론트엔드 서비스
-  frontend:
-    build:
-      context: ./nextjs
-      dockerfile: Dockerfile
-    ports:
-      - "3000:3000"
-    env_file:
-      - ./nextjs/.env.local
-    depends_on:
-      - backend
-
   # PostgreSQL + pgvector (관계형 DB + 벡터 검색)
   pgvector:
     image: pgvector/pgvector:pg17
