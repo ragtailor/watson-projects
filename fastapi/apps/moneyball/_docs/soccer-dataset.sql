@@ -336,7 +336,7 @@ INSERT INTO player (player_id, player_name, e_player_name, nickname, join_yyyy, 
 ('2007214', '노상래', NULL, NULL, NULL, 'FW', 8, NULL, '1980-12-15'::date, 1, 175, 74, 'K07'),
 ('2009149', '성한수', NULL, NULL, NULL, 'FW', 40, NULL, '1986-03-10'::date, 2, 177, 69, 'K07');
 
-실행 순서 4 - 4
+-- 실행 순서 4 - 4
 
 
 INSERT INTO player (player_id, player_name, e_player_name, nickname, join_yyyy, position, back_no, nation, birth_date, solar, height, weight, team_id) VALUES
@@ -398,7 +398,7 @@ INSERT INTO player (player_id, player_name, e_player_name, nickname, join_yyyy, 
 ('2000087', '정은익', 'JEONG, EUNIK', NULL, '2010', 'FW', 35, NULL, '1991-03-09'::date, 1, 176, 65, 'K05');
 
 
-실행 순서 4 - 5
+-- 실행 순서 4 - 5
 
 
 INSERT INTO player (player_id, player_name, team_id, e_player_name, nickname, join_yyyy, position, back_no, nation, birth_date, solar, height, weight) VALUES
@@ -472,7 +472,7 @@ INSERT INTO player (player_id, player_name, team_id, e_player_name, nickname, jo
 ('2010164', '히카르도', 'K09', NULL, NULL, NULL, 'MF', '10', '브라질', '1986-06-08'::date, 1, 189, 71);
 
 
-실행 순서 4 - 6
+-- 실행 순서 4 - 6
 
 INSERT INTO player (player_id, player_name, team_id, e_player_name, nickname, join_yyyy, position, back_no, nation, birth_date, solar, height, weight) VALUES
 ('2011082', '권정혁', 'K01', 'KWON, JUNGHYUK', NULL, '2011', 'GK', 1, NULL, '1988-08-02'::date, 1, 195, 80),
@@ -587,7 +587,7 @@ INSERT INTO player (player_id, player_name, team_id, e_player_name, nickname, jo
 ('2011094', '장동현', 'K08', 'JANG, DONGHYUN', NULL, NULL, 'FW', 39, NULL, '1992-03-19'::date, 1, 178, 67),
 ('2007250', '황연석', 'K08', 'HWANG, YOUNSUCK', NULL, NULL, 'FW', 16, NULL, '1983-10-17'::date, 1, 192, 81);
 
-실행 순서 4 - 7
+-- 실행 순서 4 - 7
 
 
 INSERT INTO player (player_id, player_name, team_id, e_player_name, nickname, join_yyyy, position, back_no, nation, birth_date, solar, height, weight) VALUES
@@ -638,7 +638,7 @@ INSERT INTO player (player_id, player_name, team_id, e_player_name, nickname, jo
 ('2010802', '박창우', 'K15', NULL, NULL, NULL, 'DF', 13, NULL, '1989-05-17'::date, 1, 177, 68),
 ('2010803', '박진하', 'K15', NULL, NULL, NULL, 'FW', 11, NULL, '1989-01-09'::date, 1, 181, 62);
 
-실행 순서 5 - 1
+-- 실행 순서 5 - 1
 
 INSERT INTO schedule (stadium_id, sche_date, gubun, hometeam_id, awayteam_id, home_score, away_score) VALUES
 ('D01', '2012-09-11', 'False'::VARCHAR, 'K07', 'K05', NULL, NULL),
@@ -798,7 +798,7 @@ INSERT INTO schedule (stadium_id, sche_date, gubun, hometeam_id, awayteam_id, ho
 ('C06', '2012-09-04', 'Y', 'K03', 'K10', 0, 0),
 ('C02', '2012-09-04', 'Y', 'K06', 'K07', 2, 2);
 
-실행 순서 5 - 2
+-- 실행 순서 5 - 2
 
 
 INSERT INTO schedule (stadium_id, sche_date, gubun, hometeam_id, awayteam_id, home_score, away_score)
