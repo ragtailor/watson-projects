@@ -41,6 +41,14 @@ const lessonItems = [
       { label: "게시판 글쓰기", href: "/lesson/crawling/board/write" },
     ],
   },
+  {
+    key: "rag-system",
+    label: "RAG SYSTEM",
+    basePath: "/lesson/rag-system",
+    children: [
+      { label: "축구 마스터", href: "/lesson/rag-system/moneyball" },
+    ],
+  },
 ];
 
 const linkCls =

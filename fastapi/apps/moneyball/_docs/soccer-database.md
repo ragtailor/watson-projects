@@ -52,6 +52,7 @@
 - `address` (VARCHAR(60), Nullable)
 - `ddd` (VARCHAR(10), Nullable)
 - `tel` (VARCHAR(10), Nullable)
+- `stadium_embedding` (Vector(1536), Nullable) *— RAG 검색을 위한 경기장 설명(이름·주소 등) 기반 임베딩.*
 
 ### 2. `team` 테이블 (구단)
 - `team_id` (VARCHAR(10), Primary Key)
@@ -68,6 +69,7 @@
 - `homepage` (VARCHAR(50), Nullable)
 - `owner` (VARCHAR(10), Nullable)
 - `stadium_id` (VARCHAR(10), Foreign Key -> `stadium.stadium_id` 참조)
+- `team_embedding` (Vector(1536), Nullable) *— RAG 검색을 위한 구단 설명(팀명·연고지 등) 기반 임베딩.*
 
 ### 3. `schedule` 테이블 (경기 일정)
 - `sche_date` (VARCHAR(10), Primary Key)
@@ -77,6 +79,7 @@
 - `awayteam_id` (VARCHAR(10), Nullable)
 - `home_score` (INTEGER, Nullable)
 - `away_score` (INTEGER, Nullable)
+- `schedule_embedding` (Vector(1536), Nullable) *— RAG 검색을 위한 경기 결과·일정 서술(홈/어웨이팀, 스코어 등) 기반 임베딩.*
 
 ### 4. `player` 테이블 (선수 및 벡터 통합)
 - `player_id` (VARCHAR(10), Primary Key)
