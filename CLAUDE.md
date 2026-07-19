@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## 저장소 구조
 
-세 개의 git 서브모듈로 이루어진 모노레포다.
+세 개의 도메인 디렉토리로 이루어진 단일 저장소(모놀리식) 모노레포다.
 
 ```
 com.ragtailor/
@@ -14,8 +14,6 @@ com.ragtailor/
 ├── nextjs/     # Next.js TypeScript 프론트엔드
 └── flutter/    # Flutter 모바일 앱
 ```
-
-서브모듈을 처음 받을 때: `git submodule update --init --recursive`
 
 ---
 
@@ -39,7 +37,7 @@ com.ragtailor/
 
 | 범위 | 위치 |
 |------|------|
-| 공통 (모든 서브모듈에 걸치는 내용) | `_docs/` |
+| 공통 (모든 도메인에 걸치는 내용) | `_docs/` |
 | 백엔드 전용 | `fastapi/_docs/` |
 | 프론트엔드 전용 | `nextjs/_docs/` |
 | 모바일 전용 | `flutter/_docs/` |
