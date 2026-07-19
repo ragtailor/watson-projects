@@ -31,6 +31,19 @@ com.ragtailor/
 
 ---
 
+## 배포 (odyssey 홈서버)
+
+- 도메인: `api.ragtaylor.com` / 호스트 포트: `8081`
+- DB: `ragtaylor_db` (전용 사용자 `ragtaylor_user`) / Redis: DB 번호 `1`
+- 공유 인프라(PostgreSQL, Redis)는 별도 저장소 `inception`이 담당하며,
+  공유 Docker 네트워크 `dreamscape`를 생성하는 주체다. 이 프로젝트는
+  `docker-compose.yml`에서 `dreamscape`를 `external: true`로 선언해 합류만 한다.
+  네트워크 생성 순서상 `inception`이 먼저 기동되어 있어야 한다.
+- n8n, neo4j는 dreamscape와 무관한 이 프로젝트만의 로컬 스택이다.
+- `.env`는 절대 커밋하지 않는다. 값 변경 시 `.env.example`을 함께 갱신한다.
+
+---
+
 ## _docs 위치 규칙
 
 문서 파일(`.md`)은 내용의 범위에 따라 아래 위치에 둔다.
