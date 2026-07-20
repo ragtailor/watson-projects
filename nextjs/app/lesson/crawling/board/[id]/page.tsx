@@ -2,8 +2,9 @@ export const dynamic = "force-dynamic";
 
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { sql } from "@/lib/db";
 import { Button } from "@/components/ui/button";
+
+const API_BASE = process.env.NEXT_PUBLIC_API_URL?.replace(/\/$/, "") ?? "";
 
 interface Post {
   id: number;
@@ -16,14 +17,13 @@ interface Post {
 }
 
 async function getPost(id: string): Promise<Post | null> {
-  const [row] = await sql`
-    SELECT id, title, COALESCE(author, '익명') AS author, content,
-           file_url AS "fileUrl", file_name AS "fileName",
-           TO_CHAR(created_at AT TIME ZONE 'Asia/Seoul', 'YYYY-MM-DD HH24:MI') AS "createdAt"
-    FROM posts
-    WHERE id = ${Number(id)}
-  `;
-  return (row as Post) ?? null;
+  try {
+    const res = await fetch(`${API_BASE}/api/board/${id}`, { cache: "no-store" });
+    if (!res.ok) return null;
+    return (await res.json()) as Post;
+  } catch {
+    return null;
+  }
 }
 
 export default async function BoardDetailPage({

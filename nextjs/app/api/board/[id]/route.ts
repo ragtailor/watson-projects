@@ -1,20 +1,17 @@
 import { NextResponse } from "next/server";
-import { sql } from "@/lib/db";
+
+const API_BASE = process.env.NEXT_PUBLIC_API_URL?.replace(/\/$/, "") ?? "";
 
 export async function GET(
   _req: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
   const { id } = await params;
-  const [row] = await sql`
-    SELECT id, title, COALESCE(author, '익명') AS author, content,
-           file_url AS "fileUrl", file_name AS "fileName",
-           TO_CHAR(created_at AT TIME ZONE 'Asia/Seoul', 'YYYY-MM-DD HH24:MI') AS "createdAt"
-    FROM posts
-    WHERE id = ${Number(id)}
-  `;
-  if (!row) {
-    return NextResponse.json({ error: "게시글을 찾을 수 없습니다." }, { status: 404 });
+  try {
+    const res = await fetch(`${API_BASE}/api/board/${id}`, { cache: "no-store" });
+    const data = await res.json();
+    return NextResponse.json(data, { status: res.status });
+  } catch {
+    return NextResponse.json({ error: "백엔드에 연결할 수 없습니다." }, { status: 502 });
   }
-  return NextResponse.json(row);
 }

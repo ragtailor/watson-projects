@@ -35,8 +35,9 @@ NEXT_PUBLIC_API_URL=http://localhost:8000   # tailor 백엔드
 - **shadcn/ui** — `components/ui/`에 Radix UI 기반 컴포넌트
   - 새 UI 컴포넌트: `pnpm dlx shadcn@latest add <component>`
 - **Gemini AI** — `app/api/gemini/chat/route.ts`가 Google REST API 직접 호출 (SDK 미사용)
-- **Neon Serverless** — `@neondatabase/serverless`로 DB 직접 접근 (게시판)
 - **Vercel Blob** — 파일 업로드 저장소
+
+DB는 온프레미스(api.ragtaylor.com)에만 존재하며, nextjs는 직접 접근하지 않는다. 게시판(`app/api/board/`, `app/lesson/crawling/board/`)은 `NEXT_PUBLIC_API_URL` 백엔드로 fetch 프록시한다 (fastapi 쪽 `/api/board` 엔드포인트는 아직 미구현).
 
 ---
 

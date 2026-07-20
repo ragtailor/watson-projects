@@ -12,7 +12,8 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
-import { sql } from "@/lib/db";
+
+const API_BASE = process.env.NEXT_PUBLIC_API_URL?.replace(/\/$/, "") ?? "";
 
 interface BoardPost {
   id: number;
@@ -23,24 +24,13 @@ interface BoardPost {
 }
 
 async function getPosts(): Promise<BoardPost[]> {
-  await sql`
-    CREATE TABLE IF NOT EXISTS posts (
-      id         SERIAL PRIMARY KEY,
-      title      VARCHAR(255) NOT NULL,
-      author     VARCHAR(100),
-      content    TEXT NOT NULL,
-      file_url   TEXT,
-      file_name  VARCHAR(255),
-      created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-      updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
-    )
-  `;
-  return sql`
-    SELECT id, title, COALESCE(author, '익명') AS author, content,
-           TO_CHAR(created_at AT TIME ZONE 'Asia/Seoul', 'YYYY-MM-DD') AS "createdAt"
-    FROM posts
-    ORDER BY created_at DESC
-  ` as unknown as Promise<BoardPost[]>;
+  try {
+    const res = await fetch(`${API_BASE}/api/board`, { cache: "no-store" });
+    if (!res.ok) return [];
+    return (await res.json()) as BoardPost[];
+  } catch {
+    return [];
+  }
 }
 
 export default async function CrawlingBoardPage() {
