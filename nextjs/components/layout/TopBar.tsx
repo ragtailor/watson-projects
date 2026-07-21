@@ -31,6 +31,9 @@ export function TopBar() {
     return () => { document.body.style.overflow = ""; };
   }, [drawerOpen]);
 
+  // 로그인 후 대시보드는 자체 상단바를 쓰므로 사이트 공통 TopBar를 띄우지 않는다.
+  if (pathname.startsWith("/dashboard")) return null;
+
   return (
     <>
       <header className="fixed inset-x-0 top-0 z-50 flex h-12 items-center justify-between border-b border-neutral-100 bg-white px-4 dark:border-gray-800 dark:bg-[#0a0a0a]">
