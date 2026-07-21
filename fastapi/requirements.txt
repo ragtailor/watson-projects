@@ -25,6 +25,10 @@ langchain-community==0.3.24
 langsmith==0.2.6
 langgraph==0.2.70
 ultralytics
+timm
+onnxruntime
+redis
+httpx
 boto3
 pytest>=8.0
 pytest-asyncio>=0.23

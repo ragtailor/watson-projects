@@ -187,6 +187,9 @@ def install_login_gate(app, service_name: str) -> None:
             return await call_next(request)
         if path == "/health":
             return JSONResponse({"status": "ok"})
+        # 소셜 로그인(OAuth) 인가·콜백 경로 — 사이트 게이트를 몰라도 실제 로그인이 가능해야 한다.
+        if path.startswith("/api/kingsman/oauth/"):
+            return await call_next(request)
         if path == "/login":
             if request.method == "GET":
                 next_path = _safe_next(request.query_params.get("next", "/"))

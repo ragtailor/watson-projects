@@ -5,6 +5,7 @@ import { ThemeProvider } from 'next-themes'
 import { TopBar } from '@/components/layout/TopBar'
 import { LeftSidebar } from '@/components/layout/LeftSidebar'
 import { RightPanelProvider, RightPanel } from '@/components/layout/RightPanelContext'
+import { OAuthRedirectHandler } from '@/components/auth/OAuthRedirectHandler'
 import './globals.css'
 
 const _geist = Geist({ subsets: ['latin'] })
@@ -35,6 +36,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          <OAuthRedirectHandler />
           <RightPanelProvider>
             <TopBar />
             <div className="mt-12 flex h-[calc(100vh-3rem)] overflow-hidden">

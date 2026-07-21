@@ -28,6 +28,7 @@ from tailor.apps.titanic.adapter.inbound.api import titanic_router
 from star_craft.adapter.inbound.api import star_craft_router
 from sherlock_homes.adapter.inbound.api import sherlock_homes_router
 from silicon_valley.adapter.inbound.api import silicon_valley_router
+from kingsman.adapter.inbound.api import kingsman_router
 
 
 def _configure_logging() -> None:
@@ -71,6 +72,7 @@ app.include_router(titanic_router, prefix="/api")
 app.include_router(star_craft_router, prefix="/api")
 app.include_router(sherlock_homes_router, prefix="/api")
 app.include_router(silicon_valley_router, prefix="/api")
+app.include_router(kingsman_router, prefix="/api")
 
 # 로그인 게이트 (003) — 마지막에 추가된 미들웨어가 바깥층이 되어 모든 요청을 먼저 검사
 from login_gate import install_login_gate  # noqa: E402

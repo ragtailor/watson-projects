@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 
+import { SocialLoginButtons } from "@/components/auth/SocialLoginButtons";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -110,6 +111,7 @@ export function AuthPanel({
               로그인
             </Button>
           </form>
+          <SocialLoginButtons />
         </TabsContent>
 
         {/* 회원가입 탭 */}
