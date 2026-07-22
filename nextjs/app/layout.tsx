@@ -39,7 +39,7 @@ export default function RootLayout({
           <OAuthRedirectHandler />
           <RightPanelProvider>
             <TopBar />
-            <div className="mt-12 flex h-[calc(100vh-3rem)] overflow-hidden">
+            <div className="mt-16 flex h-[calc(100vh-4rem)] overflow-hidden">
               <LeftSidebar />
               <main
                 id="main-scroll"

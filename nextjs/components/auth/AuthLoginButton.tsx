@@ -1,30 +1,24 @@
 "use client";
 
-import { useState } from "react";
+import Link from "next/link";
 
-import { AuthModal } from "@/components/auth/AuthModal";
 import { cn } from "@/lib/utils";
 
 type AuthLoginButtonProps = {
   className?: string;
+  label?: string;
 };
 
-export function AuthLoginButton({ className }: AuthLoginButtonProps) {
-  const [open, setOpen] = useState(false);
-
+export function AuthLoginButton({ className, label = "로그인" }: AuthLoginButtonProps) {
   return (
-    <>
-      <button
-        type="button"
-        onClick={() => setOpen(true)}
-        className={cn(
-          "rounded-full border border-slate-200 bg-slate-50 px-3 py-2 text-xs font-semibold text-slate-800 transition-colors hover:bg-slate-100 sm:px-4 sm:text-sm",
-          className,
-        )}
-      >
-        로그인
-      </button>
-      <AuthModal open={open} onOpenChange={setOpen} />
-    </>
+    <Link
+      href="/login"
+      className={cn(
+        "inline-flex items-center justify-center rounded-full border border-slate-200 bg-slate-50 px-3 py-2 text-xs font-semibold text-slate-800 transition-colors hover:bg-slate-100 sm:px-4 sm:text-sm",
+        className,
+      )}
+    >
+      {label}
+    </Link>
   );
 }

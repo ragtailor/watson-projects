@@ -46,7 +46,7 @@ export function HomeHero() {
       </section>
 
       {/* Desktop */}
-      <section className="relative hidden min-h-[calc(100vh-3rem)] items-center justify-center bg-white dark:bg-[#0a0a0a] lg:flex">
+      <section className="relative hidden min-h-[calc(100vh-4rem)] items-center justify-center bg-white dark:bg-[#0a0a0a] lg:flex">
         <div className="mx-auto w-full max-w-lg px-4 py-16 text-center sm:max-w-xl sm:py-20 md:max-w-2xl">
           <div className="mb-8">
             <p className="mb-3 text-sm text-slate-600 dark:text-slate-400">

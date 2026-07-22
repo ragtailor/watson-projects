@@ -1,143 +1,183 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
-import { Menu, X } from "lucide-react";
+import {
+  ChevronsUpDown,
+  Globe,
+  Layers,
+  Menu,
+  MonitorSmartphone,
+  Shield,
+  ShieldCheck,
+  Sparkles,
+  Workflow,
+  X,
+} from "lucide-react";
 
 import { AuthLoginButton } from "@/components/auth/AuthLoginButton";
-import { ThemeToggle } from "@/components/ThemeToggle";
-import { LessonSectionNav } from "./LeftSidebar";
 
-const globalLinks = [
-  { href: "/", label: "교육개요" },
-  { href: "/lesson", label: "LESSON" },
-  { href: "/notice", label: "FAQ" },
+const solutionsColumns = [
+  [
+    { icon: Sparkles, title: "AI", desc: "Build intelligent applications with AI at the edge" },
+    { icon: Globe, title: "Network", desc: "Global network services for performance and reliability" },
+    { icon: Workflow, title: "Workflows", desc: "Orchestrate complex multi-step processes" },
+  ],
+  [
+    { icon: ShieldCheck, title: "AI Security", desc: "Secure and control AI adoption without slowing innovation." },
+    { icon: Layers, title: "Platforms", desc: "Build platforms on Cloudflare's infrastructure" },
+  ],
+  [
+    { icon: MonitorSmartphone, title: "Frontends", desc: "Deploy frontend applications globally in seconds" },
+    { icon: Shield, title: "Security", desc: "Protect your applications from threats" },
+  ],
+];
+
+function SolutionsDropdown() {
+  return (
+    <div className="grid w-[720px] grid-cols-3 gap-8 rounded-2xl bg-neutral-100 p-6 shadow-lg">
+      {solutionsColumns.map((column, i) => (
+        <div key={i} className="flex flex-col gap-5">
+          {column.map(({ icon: Icon, title, desc }) => (
+            <div key={title} className="flex items-start gap-3">
+              <Icon className="mt-0.5 h-5 w-5 shrink-0 text-neutral-700" />
+              <div>
+                <p className="text-sm font-semibold text-neutral-900">{title}</p>
+                <p className="mt-0.5 text-xs leading-snug text-neutral-600">{desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function PlaceholderDropdown() {
+  return (
+    <div className="w-[240px] rounded-2xl bg-neutral-100 p-6 shadow-lg">
+      <p className="text-sm text-neutral-500">준비 중입니다</p>
+    </div>
+  );
+}
+
+const navItems = [
+  { label: "Products", dropdown: PlaceholderDropdown },
+  { label: "Solutions", dropdown: SolutionsDropdown },
+  { label: "Resources", dropdown: PlaceholderDropdown },
+  { label: "Pricing", dropdown: null },
 ] as const;
 
-const utilCls =
-  "text-[11px] uppercase tracking-[0.15em] text-neutral-900 transition-opacity hover:opacity-50 dark:text-neutral-100";
-
 export function TopBar() {
-  const [drawerOpen, setDrawerOpen] = useState(false);
   const pathname = usePathname();
-  const isLesson = pathname.startsWith("/lesson");
-  const drawerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => { setDrawerOpen(false); }, [pathname]);
-
-  useEffect(() => {
-    document.body.style.overflow = drawerOpen ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
-  }, [drawerOpen]);
+  const [drawerOpen, setDrawerOpen] = useState(false);
 
   // 로그인 후 대시보드는 자체 상단바를 쓰므로 사이트 공통 TopBar를 띄우지 않는다.
   if (pathname.startsWith("/dashboard")) return null;
 
   return (
     <>
-      <header className="fixed inset-x-0 top-0 z-50 flex h-12 items-center justify-between border-b border-neutral-100 bg-white px-4 dark:border-gray-800 dark:bg-[#0a0a0a]">
+      <header className="fixed inset-x-0 top-0 z-50 flex h-16 items-center justify-between bg-white px-6">
         {/* 로고 */}
-        <Link href="/" className="shrink-0 text-sm font-bold tracking-tight text-neutral-900 dark:text-neutral-100">
+        <Link href="/" className="shrink-0 text-lg font-bold tracking-tight text-neutral-900">
           RAG<span className="text-sky-600"> Tailor</span>
         </Link>
 
-        {/* 데스크탑 글로벌 네비 */}
-        <nav className="hidden items-center gap-6 md:flex" aria-label="글로벌 네비">
-          {globalLinks.map(({ href, label }) => (
-            <Link key={href} href={href} className={utilCls}>{label}</Link>
-          ))}
-          <a href="mailto:rex@ragwatson.com" className={utilCls}>CONTACT</a>
+        {/* 데스크탑 네비게이션 */}
+        <nav className="hidden items-center gap-1 lg:flex" aria-label="주 메뉴">
+          {navItems.map(({ label, dropdown: Dropdown }) =>
+            Dropdown ? (
+              <div key={label} className="group relative">
+                <button
+                  type="button"
+                  className="flex items-center gap-1 rounded-md px-3 py-2 text-sm font-medium text-neutral-900 transition-colors group-hover:bg-neutral-100"
+                >
+                  {label}
+                  <ChevronsUpDown className="h-3.5 w-3.5" />
+                </button>
+
+                {/* 드롭다운 팝업 */}
+                <div className="invisible absolute left-1/2 top-full -translate-x-1/2 pt-2 opacity-0 transition-opacity duration-150 group-hover:visible group-hover:opacity-100">
+                  <Dropdown />
+                </div>
+              </div>
+            ) : (
+              <button
+                key={label}
+                type="button"
+                className="flex items-center gap-1 rounded-md px-3 py-2 text-sm font-medium text-neutral-900 transition-colors hover:bg-neutral-100"
+              >
+                {label}
+              </button>
+            ),
+          )}
         </nav>
 
-        {/* 데스크탑 우측: ThemeToggle + Login */}
-        <div className="hidden items-center gap-3 md:flex">
-          <ThemeToggle />
-          <AuthLoginButton className="rounded-none border-0 bg-transparent px-0 py-0 text-[11px] font-normal uppercase tracking-[0.15em] text-neutral-900 shadow-none hover:bg-transparent hover:opacity-50 dark:text-neutral-100" />
-        </div>
-
-        {/* 모바일: ThemeToggle + 햄버거 */}
-        <div className="flex items-center gap-3 md:hidden">
-          <ThemeToggle />
+        {/* 데스크탑 우측 유틸리티 */}
+        <div className="hidden shrink-0 items-center gap-5 lg:flex">
+          <AuthLoginButton
+            label="Login"
+            className="rounded-full border border-neutral-300 bg-white px-4 py-2 text-sm font-medium text-neutral-900 shadow-none hover:bg-neutral-50"
+          />
           <button
             type="button"
-            onClick={() => setDrawerOpen((v) => !v)}
-            className={`${utilCls}`}
-            aria-expanded={drawerOpen}
-            aria-controls="mobile-drawer"
-            aria-label={drawerOpen ? "메뉴 닫기" : "메뉴 열기"}
+            className="rounded-full bg-neutral-900 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-neutral-800"
           >
-            {drawerOpen ? "CLOSE" : "MENU"}
+            Contact sales
           </button>
         </div>
+
+        {/* 모바일: 햄버거 */}
+        <button
+          type="button"
+          onClick={() => setDrawerOpen((v) => !v)}
+          className="flex items-center text-neutral-900 lg:hidden"
+          aria-expanded={drawerOpen}
+          aria-controls="mobile-drawer"
+          aria-label={drawerOpen ? "메뉴 닫기" : "메뉴 열기"}
+        >
+          {drawerOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+        </button>
       </header>
 
       {/* 모바일 드로어 */}
       {drawerOpen && (
         <>
           <div
-            className="fixed inset-0 z-40 bg-black/20 md:hidden"
+            className="fixed inset-0 z-40 bg-black/20 lg:hidden"
             onClick={() => setDrawerOpen(false)}
             aria-hidden="true"
           />
           <div
             id="mobile-drawer"
-            ref={drawerRef}
             role="dialog"
             aria-modal="true"
             aria-label="모바일 메뉴"
-            className="fixed bottom-0 left-0 top-0 z-50 flex w-[min(85vw,208px)] flex-col overflow-y-auto bg-white shadow-xl dark:bg-[#111111] md:hidden"
+            className="fixed inset-x-0 top-16 z-50 flex flex-col gap-1 bg-white p-4 shadow-lg lg:hidden"
           >
-            {/* 드로어 헤더 */}
-            <div className="flex h-12 shrink-0 items-center justify-between border-b border-neutral-100 px-4 dark:border-gray-800">
-              <Link
-                href="/"
-                onClick={() => setDrawerOpen(false)}
-                className="text-sm font-bold tracking-tight text-neutral-900 dark:text-neutral-100"
+            {navItems.map(({ label, dropdown }) => (
+              <button
+                key={label}
+                type="button"
+                className="flex items-center justify-between rounded-md px-3 py-3 text-left text-sm font-medium text-neutral-900 hover:bg-neutral-100"
               >
-                RAG<span className="text-sky-600"> Tailor</span>
-              </Link>
+                {label}
+                {dropdown && <ChevronsUpDown className="h-3.5 w-3.5" />}
+              </button>
+            ))}
+            <div className="mt-2 flex flex-col gap-2 border-t border-neutral-100 pt-4">
+              <AuthLoginButton
+                label="Login"
+                className="w-full rounded-full border border-neutral-300 bg-white px-4 py-2 text-sm font-medium text-neutral-900 shadow-none hover:bg-neutral-50"
+              />
               <button
                 type="button"
-                onClick={() => setDrawerOpen(false)}
-                className="text-neutral-500 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100"
-                aria-label="닫기"
+                className="w-full rounded-full bg-neutral-900 px-4 py-2 text-sm font-medium text-white hover:bg-neutral-800"
               >
-                <X className="h-4 w-4" />
+                Contact sales
               </button>
             </div>
-
-            {/* 드로어 본문 */}
-            <nav className="flex flex-col px-4 py-4" aria-label="모바일 메뉴">
-              <div className="border-b border-neutral-100 pb-4 dark:border-gray-800">
-                <p className="mb-2 text-[9px] uppercase tracking-[0.2em] text-neutral-400 dark:text-neutral-500">메뉴</p>
-                {globalLinks.map(({ href, label }) => (
-                  <Link
-                    key={href}
-                    href={href}
-                    onClick={() => setDrawerOpen(false)}
-                    className="block py-2 text-sm font-medium text-neutral-900 hover:opacity-60 dark:text-neutral-100"
-                  >
-                    {label}
-                  </Link>
-                ))}
-                <a
-                  href="mailto:rex@ragwatson.com"
-                  className="block py-2 text-sm font-medium text-neutral-900 hover:opacity-60 dark:text-neutral-100"
-                >
-                  CONTACT
-                </a>
-                <div className="pt-1">
-                  <AuthLoginButton className="h-auto w-full justify-start rounded-none border-0 bg-transparent p-0 py-2 text-left text-sm font-medium text-neutral-900 shadow-none hover:bg-transparent hover:opacity-60 dark:text-neutral-100" />
-                </div>
-              </div>
-
-              {isLesson && (
-                <div className="pt-4">
-                  <LessonSectionNav onNavigate={() => setDrawerOpen(false)} />
-                </div>
-              )}
-            </nav>
           </div>
         </>
       )}
