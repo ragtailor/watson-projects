@@ -25,7 +25,10 @@ services:
     ports:
       - "8081:8000"
     env_file:
+      # .env: 기존 백엔드 설정(DATABASE_URL/REDIS_URL 등) 유지
+      # .env.backend: JWT_PUBLIC_KEY(검증 전용). 개인키는 절대 넣지 않는다.
       - .env
+      - .env.backend
     volumes:
       - ./fastapi:/fastapi
     extra_hosts:
@@ -34,6 +37,20 @@ services:
       - neo4j
     networks:
       - default
+      - dreamscape
+
+  # 인증 게이트웨이 (auth.ragtailor.com) — 토큰 발급 전용. 개인키는 여기에만.
+  auth:
+    build:
+      context: ./fastapi
+      dockerfile: Dockerfile
+    command: uvicorn auth_main:app --host 0.0.0.0 --port 9000
+    restart: unless-stopped
+    env_file:
+      - .env.auth        # JWT_PRIVATE_KEY, OAuth client secrets
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    networks:
       - dreamscape
 
   # Graph DB

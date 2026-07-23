@@ -2,3 +2,11 @@ EXAONE-3.5-7.8B-Instruct-AWQ/
 
 # 환경변수 (절대 커밋 금지)
 .env
+.env.*
+!.env.*.example
+
+# 키·비밀 (절대 커밋 금지)
+*.pem
+*.key
+jwt_private.pem
+jwt_public.pem

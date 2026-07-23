@@ -62,11 +62,102 @@ function PlaceholderDropdown() {
   );
 }
 
+const productsColumns = [
+  {
+    header: "Compute",
+    items: [
+      { title: "Browser Run", desc: "Automated browsers" },
+      { title: "Containers", desc: "Any language, anywhere" },
+      { title: "Durable Objects", desc: "Stateful compute" },
+      { title: "Sandboxes", desc: "Secure code execution" },
+      { title: "Workers", desc: "Global serverless functions" },
+      { title: "Workers for Platforms", desc: "Programmable Platform Solutions" },
+      { title: "Workflows", desc: "Process orchestration" },
+    ],
+  },
+  {
+    header: "Storage",
+    items: [
+      { title: "Artifacts", desc: "Git-native versioned storage" },
+      { title: "D1", desc: "Serverless SQL" },
+      { title: "Data Platform", desc: "Ingest, Catalog & Query" },
+      { title: "Hyperdrive", desc: "Global databases" },
+      { title: "Queues", desc: "Message processing" },
+      { title: "R2", desc: "Egress-free storage" },
+      { title: "KV", desc: "Ultra-fast key-value storage" },
+    ],
+  },
+  {
+    header: "AI",
+    items: [
+      { title: "Agents", desc: "Build stateful AI agents" },
+      { title: "AI Gateway", desc: "AI observability" },
+      { title: "AI Search", desc: "Instant retrieval" },
+      { title: "Vectorize", desc: "Vector database" },
+      { title: "Workers AI", desc: "Edge AI models" },
+    ],
+  },
+  {
+    header: "SASE / Zero Trust",
+    items: [
+      { title: "SASE", desc: "Cloudflare SASE platform" },
+      { title: "Access", desc: "Zero trust access to private resources" },
+      { title: "CASB", desc: "SaaS and cloud posture" },
+      { title: "Data Loss Prevention", desc: "Protect sensitive data" },
+      { title: "Gateway", desc: "Web filtering" },
+      { title: "Browser Isolation", desc: "Secure web browsing" },
+      { title: "WAN", desc: "Cloud-delivered networking" },
+    ],
+  },
+  {
+    header: "Security",
+    items: [
+      { title: "DDoS Protection", desc: "Mitigation Solutions" },
+      { title: "Rate Limiting", desc: "Abuse prevention" },
+      { title: "SSL", desc: "Secure Your Site with SSL" },
+      { title: "Turnstile", desc: "A CAPTCHA Replacement Solution" },
+      { title: "WAF", desc: "Web Application Firewall" },
+      { title: "Magic Transit", desc: "DDoS Protection for Networks" },
+      { title: "Client-Side Security", desc: "Prevent browser supply chain attacks" },
+    ],
+  },
+  {
+    header: "Network & Content Delivery",
+    items: [
+      { title: "CDN", desc: "Faster delivery & caching" },
+      { title: "DNS", desc: "Fast DNS" },
+      { title: "Load Balancing", desc: "Zero downtime" },
+      { title: "TURN / SFU", desc: "Real-time infra" },
+      { title: "Analytics", desc: "Web Performance & Security" },
+    ],
+  },
+];
+
+function ProductsDropdown() {
+  return (
+    <div className="grid w-[960px] grid-cols-6 gap-6 rounded-2xl bg-neutral-100 p-6 shadow-lg">
+      {productsColumns.map(({ header, items }) => (
+        <div key={header} className="flex flex-col gap-4">
+          <p className="text-xs font-semibold uppercase tracking-wide text-neutral-500">{header}</p>
+          <div className="flex flex-col gap-3">
+            {items.map(({ title, desc }) => (
+              <div key={title}>
+                <p className="text-sm font-semibold text-neutral-900">{title}</p>
+                <p className="mt-0.5 text-xs leading-snug text-neutral-600">{desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
 const navItems = [
-  { label: "Products", dropdown: PlaceholderDropdown },
+  { label: "Products", dropdown: ProductsDropdown },
   { label: "Solutions", dropdown: SolutionsDropdown },
   { label: "Resources", dropdown: PlaceholderDropdown },
-  { label: "Pricing", dropdown: null },
+  { label: "Blog", dropdown: null },
 ] as const;
 
 export function TopBar() {
@@ -98,7 +189,7 @@ export function TopBar() {
                 </button>
 
                 {/* 드롭다운 팝업 */}
-                <div className="invisible absolute left-1/2 top-full -translate-x-1/2 pt-2 opacity-0 transition-opacity duration-150 group-hover:visible group-hover:opacity-100">
+                <div className="invisible absolute left-0 top-full pt-2 opacity-0 transition-opacity duration-150 group-hover:visible group-hover:opacity-100">
                   <Dropdown />
                 </div>
               </div>

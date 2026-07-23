@@ -17,6 +17,9 @@ root_packages =
     silicon_valley
     harry_porter
     jobs
+    moneyball
+    dumb_and_dumber
+    auth
 include_external_packages = True
 
 [importlinter:contract:star-topology-no-spoke-to-spoke]
@@ -75,3 +78,24 @@ forbidden_modules =
     silicon_valley.adapter
     harry_porter.adapter
     jobs.adapter
+
+[importlinter:contract:auth-isolation]
+# AUTH GATEWAY ISOLATION RULE
+# apps/auth 는 auth_main 엔트리포인트만 사용해야 한다.
+# 어떤 비즈니스 앱도 auth 를 (직접·간접) import 해서는 안 된다.
+# 백엔드가 인증을 위해 쓸 수 있는 것은 core.dependencies 뿐이다.
+# (import 이름은 PYTHONPATH 에 apps/ 가 포함되므로 bare 이름을 사용한다: 'auth')
+name = apps.auth is only imported by auth_main (no business app imports it)
+type = forbidden
+source_modules =
+    star_craft
+    titanic
+    kingsman
+    lion_king
+    sherlock_homes
+    silicon_valley
+    harry_porter
+    moneyball
+    dumb_and_dumber
+forbidden_modules =
+    auth

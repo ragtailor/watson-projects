@@ -30,5 +30,7 @@ onnxruntime
 redis
 httpx
 boto3
+PyJWT[crypto]
+bcrypt
 pytest>=8.0
 pytest-asyncio>=0.23
