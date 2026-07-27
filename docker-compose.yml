@@ -1,4 +1,30 @@
 services:
+  # Nginx 리버스 프록시
+  nginx:
+    image: nginx:alpine
+    container_name: nginx
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
+    # Nginx가 6시간마다 설정을 불러오게 처리 (인증서 갱신 반영용)
+    command: '/bin/sh -c ''while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g "daemon off;"'''
+
+  # Let's Encrypt 인증서 자동 갱신
+  certbot:
+    image: certbot/certbot
+    container_name: certbot
+    restart: always
+    volumes:
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
+    # 12시간마다 자동 갱신 시도
+    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+
   # n8n 워크플로우 자동화
   n8n:
     image: n8nio/n8n:latest
@@ -23,6 +49,7 @@ services:
       dockerfile: Dockerfile
     restart: unless-stopped
     ports:
+    
       - "8081:8000"
     env_file:
       # .env: 기존 백엔드 설정(DATABASE_URL/REDIS_URL 등) 유지

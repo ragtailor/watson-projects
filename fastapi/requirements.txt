@@ -30,6 +30,7 @@ onnxruntime
 redis
 httpx
 boto3
+neo4j-graphrag
 PyJWT[crypto]
 bcrypt
 pytest>=8.0
