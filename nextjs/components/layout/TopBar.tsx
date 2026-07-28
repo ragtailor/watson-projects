@@ -17,6 +17,9 @@ import {
 } from "lucide-react";
 
 import { AuthLoginButton } from "@/components/auth/AuthLoginButton";
+import { ChatPopup } from "@/components/layout/ChatPopup";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { cn } from "@/lib/utils";
 
 const solutionsColumns = [
   [
@@ -163,12 +166,13 @@ const navItems = [
 export function TopBar() {
   const pathname = usePathname();
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [chatOpen, setChatOpen] = useState(false);
 
   // 로그인 후 대시보드는 자체 상단바를 쓰므로 사이트 공통 TopBar를 띄우지 않는다.
   if (pathname.startsWith("/dashboard")) return null;
 
   return (
-    <>
+    <Dialog open={chatOpen} onOpenChange={setChatOpen}>
       <header className="fixed inset-x-0 top-0 z-50 flex h-16 items-center justify-between bg-white px-6">
         {/* 로고 */}
         <Link href="/" className="shrink-0 text-lg font-bold tracking-tight text-neutral-900">
@@ -203,6 +207,14 @@ export function TopBar() {
               </button>
             ),
           )}
+          <DialogTrigger asChild>
+            <button
+              type="button"
+              className="flex items-center gap-1 rounded-md px-3 py-2 text-sm font-medium text-neutral-900 transition-colors hover:bg-neutral-100"
+            >
+              채팅
+            </button>
+          </DialogTrigger>
         </nav>
 
         {/* 데스크탑 우측 유틸리티 */}
@@ -257,6 +269,15 @@ export function TopBar() {
                 {dropdown && <ChevronsUpDown className="h-3.5 w-3.5" />}
               </button>
             ))}
+            <DialogTrigger asChild>
+              <button
+                type="button"
+                onClick={() => setDrawerOpen(false)}
+                className="flex items-center justify-between rounded-md px-3 py-3 text-left text-sm font-medium text-neutral-900 hover:bg-neutral-100"
+              >
+                채팅
+              </button>
+            </DialogTrigger>
             <div className="mt-2 flex flex-col gap-2 border-t border-neutral-100 pt-4">
               <AuthLoginButton
                 label="Login"
@@ -272,6 +293,18 @@ export function TopBar() {
           </div>
         </>
       )}
-    </>
+
+      {/* 채팅 팝업: 데스크탑은 중앙 고정 크기 창, 모바일은 풀스크린 */}
+      <DialogContent
+        showCloseButton={false}
+        className={cn(
+          "flex flex-col gap-0 overflow-hidden p-0",
+          "inset-0 top-0 left-0 h-full w-full max-w-none translate-x-0 translate-y-0 rounded-none border-0",
+          "sm:inset-auto sm:top-1/2 sm:left-1/2 sm:h-[640px] sm:w-[400px] sm:max-w-none sm:-translate-x-1/2 sm:-translate-y-1/2 sm:rounded-2xl sm:border",
+        )}
+      >
+        <ChatPopup />
+      </DialogContent>
+    </Dialog>
   );
 }
