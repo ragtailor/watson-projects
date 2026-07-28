@@ -30,6 +30,7 @@ onnxruntime
 redis
 httpx
 boto3
+neo4j>=5.0,<6.0
 neo4j-graphrag
 PyJWT[crypto]
 bcrypt

@@ -61,7 +61,8 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"
     depends_on:
-      - neo4j
+      neo4j:
+        condition: service_healthy
     networks:
       - default
       - dreamscape
@@ -90,6 +91,12 @@ services:
       - NEO4J_AUTH=neo4j/${NEO4J_PASSWORD}
     volumes:
       - neo4j_data:/data
+    healthcheck:
+      test: ["CMD-SHELL", "cypher-shell -u neo4j -p \"$$NEO4J_PASSWORD\" 'RETURN 1' || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
 
 networks:
   dreamscape:

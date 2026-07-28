@@ -25,6 +25,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from core.dependencies import Role, RoleChecker
 from core.matrix.grid_oracle_database_manager import dispose_engine, get_db, init_engine, create_all_tables
+from core.matrix.grid_architect_graph_manager import dispose_driver, init_driver
 from tailor.apps.titanic.adapter.inbound.api import titanic_router
 from star_craft.adapter.inbound.api import star_craft_router
 from sherlock_homes.adapter.inbound.api import sherlock_homes_router
@@ -50,10 +51,12 @@ logger = logging.getLogger(__name__)
 async def lifespan(app: FastAPI):
     init_engine()
     await create_all_tables()
+    init_driver()
     try:
         yield
     finally:
         await dispose_engine()
+        await dispose_driver()
 
 
 app = FastAPI(title="TJ Watson Main Page", lifespan=lifespan)
