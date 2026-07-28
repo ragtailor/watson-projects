@@ -19,7 +19,7 @@ LangChain은 고객의 요구에 맞춘 맞춤형 솔루션을 제공할 수 있
 이 전략을 아래 `morningstar_insight` 유스케이스로 구현했다.
 
 | 전략 요소 | 구현 |
-|-----------|------|
+| --------- | ---- |
 | 방대한 재무 보고서 분석 | [002-neo4j-harness.md](002-neo4j-harness.md)의 PDF 업로드 파이프라인(`graph_pdf_loader`)으로 적재된 보고서를 `document_vector` 테이블에서 재사용 |
 | 실시간 데이터 통합 | `MorningstarReportRepository`가 요청 시점마다 최신 보고서를 DB에서 조회 |
 | 맞춤형 프롬프팅 | `MorningstarInsightGeneratorClient`의 LangChain `ChatPromptTemplate`이 최신 보고서 컨텍스트 + 사용자 질문을 결합 |
@@ -27,7 +27,7 @@ LangChain은 고객의 요구에 맞춘 맞춤형 솔루션을 제공할 수 있
 
 ### 레이어 구성
 
-```
+```text
 domain/document_vector.py                                      # 기존 재무 보고서 엔티티 재사용
 app/dtos/morningstar_insight_dto.py
 app/ports/input/morningstar_insight_use_case.py
@@ -45,7 +45,7 @@ dependencies/morningstar_insight_provider.py
 
 로컬 Ollama 서버(`core/lol/t1_mid_faker_orchestrator.py`와 동일한 관례)를 사용한다.
 
-```
+```text
 OLLAMA_BASE_URL=http://localhost:11434   # 선택, 기본값 위와 동일
 OLLAMA_MODEL=exaone3.5:2.4b              # 선택, 기본값 위와 동일
 ```
