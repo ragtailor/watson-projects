@@ -7,7 +7,7 @@ Next.js TypeScript 프론트엔드. 루트 지침은 [../CLAUDE.md](../CLAUDE.md
 ## 실행
 
 ```bash
-cd taylor
+cd nextjs
 pnpm dev        # 개발 서버 (localhost:3000)
 pnpm build      # 프로덕션 빌드
 pnpm lint       # ESLint
@@ -19,7 +19,7 @@ pnpm lint       # ESLint
 
 ## 환경 변수
 
-`taylor/.env.local`:
+`nextjs/.env.local`:
 
 ```
 GEMINI_API_KEY=...
@@ -44,7 +44,7 @@ DB는 온프레미스(api.ragtaylor.com)에만 존재하며, nextjs는 직접 �
 ## 디렉터리 구조
 
 ```
-taylor/
+nextjs/
 ├── app/                    # Next.js App Router
 │   ├── api/                # Route Handlers
 │   │   ├── gemini/chat/    # Gemini AI 채팅

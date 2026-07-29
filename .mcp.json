@@ -3,6 +3,10 @@
     "hermes": {
       "command": "hermes",
       "args": ["mcp", "serve"]
+    },
+    "github": {
+      "type": "http",
+      "url": "https://api.githubcopilot.com/mcp/"
     }
   }
 }

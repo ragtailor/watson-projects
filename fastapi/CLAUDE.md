@@ -7,7 +7,7 @@ FastAPI Python 백엔드. 루트 지침은 [../CLAUDE.md](../CLAUDE.md)를 참�
 ## 실행
 
 ```powershell
-cd tailor
+cd fastapi
 $env:PYTHONPATH = ".;apps"
 uvicorn main:app --reload --host 127.0.0.1 --port 8000
 ```
@@ -16,7 +16,8 @@ uvicorn main:app --reload --host 127.0.0.1 --port 8000
 
 ## 환경 변수
 
-`tailor/.env`를 `.env.example` 기반으로 생성한다.
+환경 변수는 **저장소 루트의 `.env`** 에서 읽는다 (`fastapi/.env`가 아니다).
+루트 `.env.example`을 복사해 생성한다.
 
 ```
 DATABASE_URL=postgresql+psycopg://user:password@localhost:5432/dbname
@@ -29,7 +30,7 @@ GEMINI_MODEL=gemini-2.5-flash   # 선택
 ## 의존성
 
 ```bash
-cd tailor
+cd fastapi
 pip install -r requirements.txt
 pip install -r requirements-test.txt
 ```
@@ -41,7 +42,7 @@ pip install -r requirements-test.txt
 테이블은 앱 시작 시 `create_all_tables()`로 자동 생성된다. Alembic이 필요할 때:
 
 ```bash
-cd tailor
+cd fastapi
 alembic revision --autogenerate -m "description"
 alembic upgrade head
 ```
@@ -53,7 +54,7 @@ alembic upgrade head
 **헥사고날(Ports & Adapters)** 아키텍처를 사용한다.
 
 ```
-tailor/
+fastapi/
 ├── main.py                 # FastAPI 엔트리포인트, CORS, lifespan
 ├── core/
 │   └── matrix/             # DB 엔진·세션 (SQLAlchemy async), Gemini 클라이언트
@@ -87,7 +88,7 @@ apps/<앱명>/
 
 **의존성 방향:** `adapter` → `app` → `domain`. 역방향 임포트는 순환 참조를 유발한다.
 
-**Python import 경로:** `tailor/`와 `tailor/apps/`가 PYTHONPATH에 포함되므로 `from titanic.xxx import ...` 형태로 임포트한다 (`from apps.titanic.xxx`가 아님).
+**Python import 경로:** `fastapi/`와 `fastapi/apps/`가 PYTHONPATH에 포함되므로 `from titanic.xxx import ...` 형태로 임포트한다 (`from apps.titanic.xxx`가 아님).
 
 ---
 
@@ -123,12 +124,12 @@ apps/<앱명>/
 켄트 벡의 **Red → Green → Refactor** 사이클을 적용한다.
 
 ```bash
-cd tailor
+cd fastapi
 python -m pytest                          # 전체
 python -m pytest apps/titanic/tests/ -v   # 앱별
 ```
 
-`pytest.ini`가 `tailor/` 루트에 있으며 `asyncio_mode = auto`로 설정되어 있다.
+`pytest.ini`가 `fastapi/` 루트에 있으며 `asyncio_mode = auto`로 설정되어 있다.
 
 ---
 
@@ -203,7 +204,7 @@ links:               # 연결되는 다른 앱(노드) 목록
 ### 검증 실행
 
 ```bash
-cd tailor
+cd fastapi
 
 # Python import 의존성 검증
 lint-imports

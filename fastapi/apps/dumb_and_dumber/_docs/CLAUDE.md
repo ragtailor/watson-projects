@@ -96,6 +96,6 @@ apps/star_craft/
 ## TDD
 
 ```bash
-cd tailor
+cd fastapi
 python -m pytest apps/star_craft/tests/ -v
 ```

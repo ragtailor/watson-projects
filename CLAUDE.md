@@ -59,6 +59,134 @@ com.ragtailor/
 
 ---
 
+## 명령어
+
+도메인마다 스택이 달라 명령어가 공유되지 않는다. 항상 해당 디렉터리로 이동해 실행한다.
+
+**백엔드 (`fastapi/`)** — Python, pip
+
+```bash
+cd fastapi
+pip install -r requirements.txt
+pip install -r requirements-test.txt
+
+PYTHONPATH=".:apps" uvicorn main:app --reload --host 127.0.0.1 --port 8000
+
+python -m pytest                          # 전체 테스트
+python -m pytest apps/titanic/tests/ -v   # 앱별 테스트
+
+lint-imports                              # spoke→spoke 임포트 검증
+markdownlint "**/_docs/**/*.md"           # 온톨로지 MD 린트
+python scripts/validate_harness.py        # 토폴로지 하네스 검증
+```
+
+**프론트엔드 (`nextjs/`)** — pnpm 전용. `npm install` / `yarn`은 사용하지 않는다.
+
+```bash
+cd nextjs
+pnpm dev      # 개발 서버 (localhost:3000)
+pnpm build    # 프로덕션 빌드
+pnpm lint     # ESLint
+```
+
+**모바일 (`flutter/`)**
+
+```bash
+cd flutter
+flutter pub get
+flutter run
+flutter test
+flutter analyze
+```
+
+**인프라 (저장소 루트)** — `docker-compose.yml`은 `nginx`, `certbot`, `api`, `auth` 네 서비스를 정의한다.
+
+```bash
+docker compose up -d
+docker compose logs -f api
+```
+
+---
+
+## 환경 변수
+
+`.env`류는 전부 커밋 금지다 (`.gitignore`가 `.env*`, `*.pem`, `*.key`를 차단하며
+`.env.*.example`만 예외). 각 예시 파일을 복사해 실제 값을 채운다.
+
+| 파일 | 예시 파일 | 주요 값 |
+|------|-----------|---------|
+| `.env` | `.env.example` | `DATABASE_URL`, `REDIS_URL`, `CORS_ORIGINS`, `GEMINI_API_KEY`, `NEO4J_*`, `AUTH_ID`/`AUTH_PW`/`SESSION_SECRET`, kingsman OAuth 클라이언트 |
+| `.env.backend` | `.env.backend.example` | `JWT_PUBLIC_KEY`, `SERVICE_AUD` |
+| `.env.auth` | `.env.auth.example` | `JWT_PRIVATE_KEY`, `JWT_PUBLIC_KEY`, `SERVICE_AUD`, `REDIS_URL` |
+| `nextjs/.env.local` | — | `GEMINI_API_KEY`, `NEXT_PUBLIC_API_URL` |
+
+**키 분리 원칙:** RS256 개인키(`JWT_PRIVATE_KEY`)는 `auth` 컨테이너에만 존재한다.
+백엔드는 공개키로 검증만 하므로 `.env.backend`에 개인키를 넣지 않는다.
+
+`auth` 쪽 `SERVICE_AUD`와 백엔드 `SERVICE_AUD`가 일치해야 토큰 검증이 통과한다.
+OAuth `redirect_uri`는 `{OAUTH_REDIRECT_BASE_URL}/api/kingsman/oauth/{provider}/callback`
+형태로 각 프로바이더 콘솔 등록값과 정확히 일치해야 한다.
+
+---
+
+## 테스트
+
+| 도메인 | 프레임워크 | 위치 |
+|--------|-----------|------|
+| fastapi | pytest (`asyncio_mode = auto`) | `apps/<앱명>/tests/` |
+| flutter | `flutter test` | `flutter/test/` |
+| nextjs | 없음 | — |
+
+- 백엔드는 **TDD (Red → Green → Refactor)** 를 적용한다. 상세는 [fastapi/CLAUDE.md](fastapi/CLAUDE.md) 참고.
+- `fastapi/pytest.ini`의 `testpaths`는 현재 `apps/titanic/tests`, `apps/auth/tests`다.
+  새 앱의 테스트를 실행하려면 이 목록에 추가한다.
+- `ollama` 마커가 붙은 테스트는 Ollama 서버가 필요하며 `addopts = -m "not ollama"`로 기본 제외된다.
+  실행하려면 `python -m pytest -m ollama`.
+- 단위 테스트는 DB 없이 돌아야 한다 (`domain` / `app/use_cases` 레이어).
+- nextjs에는 테스트 하네스가 없다. 변경 검증은 `pnpm build`로 한다.
+
+---
+
+## 코딩 컨벤션 (공통)
+
+도메인별 상세 규칙은 하위 CLAUDE.md와 `.claude/rules/`에 있다.
+`.claude/rules/`의 파일은 `paths` 프론트매터로 적용 대상 파일이 정해진다
+(예: `typescript.md` → `**/*.ts`, `**/*.tsx`).
+
+- 문서·주석·커밋 메시지·사용자에게 노출되는 에러 메시지는 **한국어**로 쓴다.
+- 커밋 메시지는 **Conventional Commits** 형식을 쓴다 (`feat:` / `fix:` / `docs:` / `refactor:` / `chore:`).
+  - 제목은 50자 이내로, 한국어로 쓴다.
+  - 예: `feat: 사용자 로그인 기능 추가`
+- 도메인 디렉터리(`fastapi` / `nextjs` / `flutter`) 간에는 코드를 직접 임포트하지 않는다.
+  통신은 HTTP API로만 한다.
+- 비밀값은 코드에 하드코딩하지 않고 환경 변수로 주입한다.
+
+---
+
+## 브랜치 전략
+
+- `main`: 유일한 통합 브랜치. 현재 작업은 main에 직접 커밋한다.
+- `desktop`: 작업 PC 동기화용 보조 브랜치.
+- 별도 develop / feature 브랜치 흐름은 현재 운용하지 않는다.
+
+---
+
+## 주의사항
+
+- **비밀값 커밋 금지** — `.env*`(예시 파일 제외), `*.pem`, `*.key`, 특히 `jwt_private.pem`.
+- **`fastapi`: spoke → spoke 직접 임포트 금지.** 앱 간 통신은 hub(`star_craft`)를 경유한다.
+  `lint-imports`가 이를 강제한다.
+- **`fastapi` 임포트 경로** — `fastapi/`와 `fastapi/apps/`가 PYTHONPATH에 들어가므로
+  `from titanic.xxx import ...` 형태로 쓴다 (`from apps.titanic.xxx`가 아님).
+- **`nextjs/components/ui/`는 shadcn/ui 자동 생성물이다.** 직접 수정하지 않고
+  `pnpm dlx shadcn@latest add <component>`로 갱신한다.
+- **`nextjs/next.config.mjs`의 `typescript.ignoreBuildErrors: true`는 의도된 설정이다.**
+  단, 타입 에러를 방치해도 된다는 뜻은 아니다.
+- **`flutter/CLAUDE.md`는 현재 비어 있다.** 모바일 작업 전 내용을 채운다.
+- 컨테이너 기동은 `inception`이 먼저 올라와 있어야 한다 (공유 네트워크 `dreamscape` 생성 주체).
+
+---
+
 # LLM 코딩 행동 지침
 
 일반적인 LLM 코딩 실수를 줄이기 위한 행동 지침이다. [Andrej Karpathy의 관찰](https://x.com/karpathy/status/2015883857489522876)을 바탕으로 정리되었다. 프로젝트별 지침이 있으면 본 문서와 병합하여 사용한다.

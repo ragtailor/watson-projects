@@ -80,7 +80,7 @@ tests/
 ### 테스트 실행
 
 ```bash
-cd tailor
+cd fastapi
 python -m pytest apps/titanic/tests/ -v        # titanic 전체
 python -m pytest apps/titanic/tests/domain/    # 도메인 레이어만
 ```
