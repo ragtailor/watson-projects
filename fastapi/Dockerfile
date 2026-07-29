@@ -2,7 +2,7 @@
 FROM python:3.13-slim
 
 # 2. 컨테이너 내부 작업 디렉토리 설정
-WORKDIR /tailor
+WORKDIR /fastapi
 
 # 3. 종속성 파일 복사 및 설치
 COPY requirements.txt .
