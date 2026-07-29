@@ -2,21 +2,10 @@
   "mcpServers": {
     "hermes": {
       "command": "hermes",
-      "args": ["mcp", "serve"]
-    },
-    "github": {
-      "type": "http",
-      "url": "https://api.githubcopilot.com/mcp/"
-    },
-    "silicon-valley": {
-      "type": "stdio",
-      "command": "python",
       "args": [
-        "/home/messi/projects/watson-projects/fastapi/apps/silicon_valley/adapter/inbound/mcp/piper_henricks_ceo_tools.py"
-      ],
-      "env": {
-        "PYTHONPATH": "/home/messi/projects/watson-projects/fastapi:/home/messi/projects/watson-projects/fastapi/apps"
-      }
+        "mcp",
+        "serve"
+      ]
     }
   }
 }
