@@ -1,0 +1,30 @@
+# Docker는 .gitignore를 참조하지 않는다. COPY . . 로 이미지에 구워지면
+# 안 되는 것들을 여기서 제외한다. 빌드 컨텍스트는 docker-compose.yml 의
+# api/auth 서비스 기준으로 ./fastapi 이다.
+
+# 비밀·자격 증명
+.env
+.env.*
+!.env.example
+!.env.*.example
+*.pem
+*.key
+
+# 파이썬 캐시·가상환경
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# 버전 관리·에디터
+.git/
+.gitignore
+.vscode/
+.idea/
+
+# 잡파일
+correlation_chart.png
+=0.23

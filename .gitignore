@@ -11,5 +11,3 @@ EXAONE-3.5-7.8B-Instruct-AWQ/
 *.key
 jwt_private.pem
 jwt_public.pem
-.env
-.mcp.json
