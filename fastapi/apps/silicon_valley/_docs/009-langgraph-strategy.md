@@ -12,7 +12,8 @@ links:
 [008-neo4j-strategy.md](008-neo4j-strategy.md)가 컨테이너·드라이버 연결까지 메웠으므로, 이 문서는 그
 드라이버 위에 **지식 그래프 적재 파이프라인**과 **StateGraph 에이전트**를 올리는 계획만 다룬다.
 
-이 문서는 설계 문서다. 코드는 포함하지 않으며, 착수 승인 시 [6장 구현 순서](#6-구현-순서)를 그대로 따른다.
+이 문서는 설계 문서다. 코드는 포함하지 않는다. **1~9단계 전부 구현 완료**이며, 산출물과 검증 범위는
+[6장](#6-구현-순서)의 두 완료 표에 기록했다. 인프라(Docker·Neo4j·pip)가 필요한 검증은 아직 남아 있다.
 
 ---
 
@@ -170,12 +171,16 @@ LangGraph로 라우팅**하는 작업이다. 1단계(벡터 검색 완성)를 �
 
 ---
 
-## 4. 레이어 매핑 (미구현 — 설계 초안)
+## 4. 레이어 매핑 (구현 완료 — 실제 파일명은 6장 완료 표 참고)
 
 `silicon_valley` 네이밍 컨벤션은 파이드 파이퍼 인물명 접두어(`piper_gilfoyle_*`, `piper_dinesh_*`,
-`piper_dunn_*`, `piper_bighetti_*`, `piper_henricks_*`)를 쓴다. 아직 배정되지 않은 인물로 `monica`를
-제안하되, [001-silicon-valley-casting.md](001-silicon-valley-casting.md)가 현재 빈 파일이므로 캐스팅 확정은
-착수 시 함께 한다.
+`piper_dunn_*`, `piper_bighetti_*`, `piper_henricks_*`)를 쓴다. 이 슬라이스는 `monica`로 확정했다.
+[001-silicon-valley-casting.md](001-silicon-valley-casting.md)는 여전히 빈 파일이므로 전체 캐스팅 문서화는
+별도 과제로 남는다.
+
+아래 초안과 실제 구현의 차이: 청크 리포지터리 포트는 `knowledge_chunk_repository_port.py`로,
+답변 생성 포트는 `piper_monica_answer_generator_port.py`로 두고, 문서 단건 조회용
+`document_reader_port.py`와 라우팅 도메인 로직 `domain/reasoning_route.py`가 추가되었다.
 
 ```text
 domain/knowledge_chunk.py                                          # 신규: 청크 엔티티 (id, document_id, content)
@@ -256,19 +261,49 @@ dependencies/piper_monica_graph_provider.py
 `Vector(1024)`로 선언돼 있으나 채팅 모델(`FakerOrchestrator.embed`)로 임베딩한다. 위 제약 때문에 이 경로는
 현재 동작하지 않으며, 차원도 실제 출력과 일치하지 않는다.
 
+### 5~9단계 구현 완료 (2026-07-30)
+
+| 단계 | 산출물 | 검증 결과 |
+| ---- | ------ | --------- |
+| 5 | `domain/knowledge_graph_fact.py`, `app/ports/output/knowledge_graph_{extractor,repository}_port.py`, `adapter/outbound/client/knowledge_graph_extractor_client.py`, `adapter/outbound/repository/knowledge_graph_repository.py`, `app/use_cases/knowledge_graph_ingest_interactor.py` | 파서 단위 테스트 9개 통과. **Neo4j 실 적재는 미검증** — 이 환경에 Docker가 없어 `Entity` 노드 수 > 0을 확인할 수 없다 |
+| 6 | `app/ports/output/graph_reasoning_port.py`, `adapter/outbound/client/graph_reasoning_client.py` | **미검증** — 라벨 격리 쿼리는 Neo4j 인스턴스가 필요하다. Cypher 문법도 실행으로 확인되지 않았다 |
+| 7 | `app/use_cases/langgraph_interactor.py` (빈 파일이었음) | 노드·조건부 엣지 단위 테스트 10개 통과. 빈 결과 스텁으로 **종료 보장 확인**(무한 루프 없음). `build_graph()`의 `StateGraph` 컴파일은 `langgraph` 미설치로 미실행 |
+| 8 | `star_craft/domain/kerrigan_intent_map.py`(`REASONING` 추가), `star_craft/adapter/outbound/client/kerrigan_engine_router_client.py` | `KerriganSemanticChatInteractor` 무수정 확인. 기존 4개 인텐트 분류 불변 여부는 Kiwi 필요로 **미검증** |
+| 9 | `piper_monica_graph_{router,schema,provider,dto}`, `app/ports/output/document_reader_port.py` | `silicon_valley` → 다른 spoke/hub 임포트 0건 (grep). `lint-imports`·`markdownlint`는 미설치로 미실행 |
+
+**추출 도구 결정 (7장 2번 해소 — 기본안에서 벗어남):** `neo4j-graphrag`의 엔티티 추출 파이프라인 대신
+Gemini 프롬프트 + `domain.parse_extraction`(순수 JSON 파서)을 쓴다. 의존성을 늘리지 않고 같은 결과를 얻으며,
+파싱 규칙(관계 정규화, 고아 관계 제거, 코드펜스 처리)을 단위 테스트로 고정할 수 있다.
+
+**설계 결정 두 가지:**
+
+- **`Entity` 단일 라벨 + `label` 속성.** 엔티티 종류를 동적 라벨로 만들지 않고 속성에 담는다. 008 1장의
+  라벨 네임스페이스 격리를 단순하게 유지하고, 6장의 고정 Cypher가 `MATCH (s:Entity)` 하나로 끝난다.
+- **추론 경로 실패 시 선형 체인으로 내려앉는다.** Neo4j·pgvector·임베딩 중 하나가 죽으면 챗봇 전체가
+  멈추므로, 라우터 어댑터가 예외를 잡아 기존 체인에 위임한다. 004 규칙 1(기존 인텐트 보호)의 연장이다.
+
+### 남은 검증 (인프라 필요)
+
+```text
+1. docker compose --profile local-db up -d pgvector  → alembic upgrade head
+2. docker compose up -d neo4j                        → POST /monica/ingest/{id} 후
+                                                        MATCH (e:Entity) RETURN count(e)
+3. ollama pull nomic-embed-text + exaone3.5:2.4b     → POST /monica/ask 왕복
+4. pip install -r requirements.txt                   → pytest, lint-imports, markdownlint
+```
+
 ---
 
 ## 7. 확정이 필요한 결정
 
-착수 전에 답이 필요한 항목이다. 임의로 정하지 않는다.
+착수 전에 답이 필요했던 항목이다. 5개 모두 해소되어 기록만 남긴다.
 
 1. ~~**임베딩 모델**~~ — **해소됨.** `nomic-embed-text`(768). 근거는 6장 "1~4단계 구현 완료" 참고.
-2. **엔티티 추출 도구** — 이미 설치된 `neo4j-graphrag`로 갈지, `langchain-experimental`을 추가해
-   `LLMGraphTransformer`를 쓸지.
-3. **추출 LLM** — 엔티티 추출을 Gemini(요약이 이미 Gemini 경로)로 할지, 로컬 Ollama로 할지. 문서당 호출 수가
-   많아 비용·속도 차이가 크다.
-4. **적재 트리거** — 그래프 적재를 업로드 요청 안에서 동기로 할지, 관리자 엔드포인트/스크립트로 분리할지.
-5. **캐스팅** — 이 슬라이스에 붙일 파이드 파이퍼 인물명 (제안: `monica`).
+2. ~~**엔티티 추출 도구**~~ — **해소됨.** Gemini 프롬프트 + 도메인 JSON 파서. 근거는 6장 "5~9단계 구현 완료" 참고.
+3. ~~**추출 LLM**~~ — **해소됨.** Gemini (요약이 이미 Gemini 경로).
+4. ~~**적재 트리거**~~ — **해소됨.** 관리자 엔드포인트 `POST /silicon-valley/monica/ingest/{document_id}`로 분리.
+   업로드 경로는 기존 동작을 유지한다.
+5. ~~**캐스팅**~~ — **해소됨.** `monica` (`piper_monica_*`).
 
 ---
 
