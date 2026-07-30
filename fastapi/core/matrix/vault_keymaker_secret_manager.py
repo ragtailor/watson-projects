@@ -8,15 +8,15 @@ from typing import Any
 
 
 def default_backend_env_path() -> Path:
-    """`backend/.env` — 이 파일: `apps/matrix/app/keymaker.py` 기준."""
-    return Path(__file__).resolve().parent.parent.parent.parent / ".env"
+    """`fastapi/.env` — 이 파일(`core/matrix/`) 기준으로 두 단계 위."""
+    return Path(__file__).resolve().parent.parent.parent / ".env"
 
 
 class Keymaker:
     """
     전역 키·설정 관리자.
 
-    - `backend/.env` 로드
+    - `fastapi/.env` 로드
     - Gemini API 키 및 `GenerativeModel` 인스턴스 보관
     - 이후 다른 서비스 키도 동일 객체에서 확장 가능
     """

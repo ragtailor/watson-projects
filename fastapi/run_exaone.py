@@ -1,8 +1,12 @@
+from pathlib import Path
+
 from transformers import AutoModelForCausalLM, AutoTokenizer, AwqConfig
 import transformers.masking_utils as masking_utils
 import torch
 
-MODEL_DIR = "EXAONE-3.5-7.8B-Instruct-AWQ"
+# 모델 디렉터리는 저장소 루트에 있다(.gitignore 로 제외). 이 스크립트가 fastapi/ 로
+# 옮겨졌으므로 cwd 에 의존하지 않도록 __file__ 기준으로 해석한다.
+MODEL_DIR = str(Path(__file__).resolve().parent.parent / "EXAONE-3.5-7.8B-Instruct-AWQ")
 
 # EXAONE-3.5's remote modeling code calls create_causal_mask() with an older
 # signature (input_embeds= / cache_position=) than this transformers version

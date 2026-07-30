@@ -16,8 +16,16 @@ uvicorn main:app --reload --host 127.0.0.1 --port 8000
 
 ## 환경 변수
 
-환경 변수는 **저장소 루트의 `.env`** 에서 읽는다 (`fastapi/.env`가 아니다).
-루트 `.env.example`을 복사해 생성한다.
+환경 변수 파일은 **전부 `fastapi/` 아래**에 있다 (저장소 루트가 아니다).
+`fastapi/.env.example` 하나가 세 파일의 예시를 겸하며, 섹션 표시대로 나눠 담는다.
+
+| 파일 | 읽는 서비스 |
+|------|-------------|
+| `fastapi/.env` | `api` (공용 설정) |
+| `fastapi/.env.backend` | `api` (`JWT_PUBLIC_KEY` 검증 전용) |
+| `fastapi/.env.auth` | `auth` (`JWT_PRIVATE_KEY` — 개인키는 여기에만) |
+
+`docker-compose.yml`도 이 디렉터리에 있어 `.env`가 자동 로드된다 (`--env-file` 불필요).
 
 ```
 DATABASE_URL=postgresql+psycopg://user:password@localhost:5432/dbname

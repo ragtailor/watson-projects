@@ -37,10 +37,11 @@ com.ragtailor/
 - DB: `ragtaylor_db` (전용 사용자 `ragtaylor_user`) / Redis: DB 번호 `1`
 - 공유 인프라(PostgreSQL, Redis)는 별도 저장소 `inception`이 담당하며,
   공유 Docker 네트워크 `dreamscape`를 생성하는 주체다. 이 프로젝트는
-  `docker-compose.yml`에서 `dreamscape`를 `external: true`로 선언해 합류만 한다.
+  `fastapi/docker-compose.yml`에서 `dreamscape`를 `external: true`로 선언해 합류만 한다.
   네트워크 생성 순서상 `inception`이 먼저 기동되어 있어야 한다.
 - n8n, neo4j는 dreamscape와 무관한 이 프로젝트만의 로컬 스택이다.
-- `.env`는 절대 커밋하지 않는다. 값 변경 시 `.env.example`을 함께 갱신한다.
+- `.env`는 `fastapi/.env`에 둔다 (루트가 아니다). 절대 커밋하지 않으며,
+  값 변경 시 `fastapi/.env.example`을 함께 갱신한다.
 
 ---
 
@@ -99,29 +100,44 @@ flutter test
 flutter analyze
 ```
 
-**인프라 (저장소 루트)** — `docker-compose.yml`은 `nginx`, `certbot`, `api`, `auth` 네 서비스를 정의한다.
+**인프라 (`fastapi/docker-compose.yml`)** — `nginx`, `certbot`, `n8n`, `pgvector`, `api`,
+`auth`, `neo4j` 일곱 서비스를 정의한다. `nextjs`/`flutter`는 Vercel로 배포하므로
+nginx/certbot도 `api.ragtaylor.com` / `auth.ragtailor.com`만 담당한다 — 배포 스택 전체가
+백엔드 소유라서 compose와 env 파일을 `fastapi/`에 모아 두었다.
 
 ```bash
-docker compose up -d
-docker compose logs -f api
+cd fastapi && docker compose up -d
+docker compose -f fastapi/docker-compose.yml up -d   # 루트에서 실행해도 동일
+docker compose -f fastapi/docker-compose.yml logs -f api
 ```
+
+프로젝트 디렉터리가 compose 파일 위치로 잡히므로 `fastapi/.env`가 자동 로드된다
+(`--env-file` 불필요). nginx 설정·인증서 디렉터리는 저장소 루트에 그대로 두고 `../`로 참조한다.
 
 ---
 
 ## 환경 변수
 
 `.env`류는 전부 커밋 금지다 (`.gitignore`가 `.env*`, `*.pem`, `*.key`를 차단하며
-`.env.*.example`만 예외). 각 예시 파일을 복사해 실제 값을 채운다.
+`.env.example`만 예외). 예시는 **`fastapi/.env.example` 하나로 통합**되어 있으며, 파일 안의
+`[.env]` / `[.env.backend]` / `[.env.auth]` 섹션 표시를 보고 해당 파일로 나눠 담는다.
+`docker-compose.yml`의 `env_file` 배선은 여전히 세 파일로 분리되어 있다.
 
-| 파일 | 예시 파일 | 주요 값 |
+**env 파일 3개는 모두 `fastapi/` 아래에 모아 둔다.** 저장소 루트에는 두지 않는다
+(`docker-compose.yml`의 `env_file` 경로가 기준).
+
+| 파일 | 예시 출처 | 주요 값 |
 |------|-----------|---------|
-| `.env` | `.env.example` | `DATABASE_URL`, `REDIS_URL`, `CORS_ORIGINS`, `GEMINI_API_KEY`, `NEO4J_*`, `AUTH_ID`/`AUTH_PW`/`SESSION_SECRET`, kingsman OAuth 클라이언트 |
-| `.env.backend` | `.env.backend.example` | `JWT_PUBLIC_KEY`, `SERVICE_AUD` |
-| `.env.auth` | `.env.auth.example` | `JWT_PRIVATE_KEY`, `JWT_PUBLIC_KEY`, `SERVICE_AUD`, `REDIS_URL` |
+| `fastapi/.env` | `fastapi/.env.example`의 `[.env]` 섹션 | `DATABASE_URL`, `REDIS_URL`, `CORS_ORIGINS`, `GEMINI_API_KEY`, `NEO4J_*`, `POSTGRES_*`, `AUTH_ID`/`AUTH_PW`/`SESSION_SECRET`, kingsman OAuth 클라이언트 |
+| `fastapi/.env.backend` | `fastapi/.env.example`의 `[.env.backend]` 섹션 | `JWT_PUBLIC_KEY`, `SERVICE_AUD` |
+| `fastapi/.env.auth` | `fastapi/.env.example`의 `[.env.auth]` 섹션 | `JWT_PRIVATE_KEY`, `JWT_PUBLIC_KEY`, `SERVICE_AUD`, `REDIS_URL` |
 | `nextjs/.env.local` | — | `GEMINI_API_KEY`, `NEXT_PUBLIC_API_URL` |
 
 **키 분리 원칙:** RS256 개인키(`JWT_PRIVATE_KEY`)는 `auth` 컨테이너에만 존재한다.
-백엔드는 공개키로 검증만 하므로 `.env.backend`에 개인키를 넣지 않는다.
+백엔드는 공개키로 검증만 하므로 `fastapi/.env.backend`에 개인키를 넣지 않는다.
+예시가 한 파일로 합쳐졌으므로, `fastapi/.env.example`을 통째로 `fastapi/.env`로 복사하면
+이 원칙이 깨진다 — `[.env.auth]` 섹션은 반드시 `fastapi/.env.auth`로만 옮긴다.
+세 파일이 같은 디렉터리에 모여 있으니 파일명을 혼동하지 않도록 주의한다.
 
 `auth` 쪽 `SERVICE_AUD`와 백엔드 `SERVICE_AUD`가 일치해야 토큰 검증이 통과한다.
 OAuth `redirect_uri`는 `{OAUTH_REDIRECT_BASE_URL}/api/kingsman/oauth/{provider}/callback`

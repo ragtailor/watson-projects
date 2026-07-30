@@ -25,5 +25,9 @@ venv/
 .vscode/
 .idea/
 
+# 배포 정의 자체는 이미지에 넣지 않는다 (빌드 컨텍스트가 이 디렉터리라 포함될 수 있음)
+docker-compose.yml
+docker/
+
 # 잡파일
 correlation_chart.png
