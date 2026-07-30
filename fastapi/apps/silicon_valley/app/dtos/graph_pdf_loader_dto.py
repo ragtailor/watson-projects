@@ -14,3 +14,4 @@ class GraphPdfLoaderResponse:
     id: int
     filename: str
     summary: str
+    chunk_count: int

@@ -28,6 +28,8 @@ import moneyball.adapter.outbound.orm.stadium_orm  # noqa: F401
 import moneyball.adapter.outbound.orm.team_orm  # noqa: F401
 import moneyball.adapter.outbound.orm.schedule_orm  # noqa: F401
 import moneyball.adapter.outbound.orm.player_orm  # noqa: F401
+import silicon_valley.adapter.outbound.orm.document_vector_orm  # noqa: F401
+import silicon_valley.adapter.outbound.orm.knowledge_chunk_orm  # noqa: F401
 
 config = context.config
 

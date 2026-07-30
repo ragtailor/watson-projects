@@ -237,14 +237,32 @@ dependencies/piper_monica_graph_provider.py
 1~4단계만으로도 "유사도 기반 문서 질의"라는 독립적인 가치가 생긴다. 5단계 이후를 나중으로 미루더라도 4단계에서
 멈출 수 있게 순서를 잡았다.
 
+### 1~4단계 구현 완료 (2026-07-30)
+
+| 단계 | 산출물 | 검증 결과 |
+| ---- | ------ | --------- |
+| 1 | `app/ports/output/knowledge_embedder_port.py`, `adapter/outbound/client/knowledge_embedder_client.py` | `nomic-embed-text` 실측 출력 길이 **768** == `EMBEDDING_DIM` |
+| 2 | `domain/knowledge_chunk.py`, `adapter/outbound/orm/knowledge_chunk_orm.py`, `alembic/versions/a1c4f7e2b930_*` | 마이그레이션 작성 완료 — `alembic upgrade head`는 DB 접속이 필요해 미실행 |
+| 3 | `GraphPdfLoaderInteractor._ingest_chunks`, `KnowledgeChunkRepositoryPort` | 유즈케이스 단위 테스트 6개 통과 (조각 수 > 0, 임베딩 1:1, `chunk_index` 순차) |
+| 4 | `adapter/outbound/repository/knowledge_chunk_repository.py` | 실제 Ollama 임베딩으로 코사인 거리 순위 확인 — 원문 발췌 질의가 해당 조각 1위 (거리 0.0181 vs 차순위 0.2449) |
+
+**임베딩 모델 결정 근거 (7장 1번 해소):** 채팅 모델과 분리했다. `exaone3.5:2.4b`는 이 프로젝트의 Ollama
+호스트에서 `/api/embeddings`를 제공하지 않으며(completion 모델은 임베딩 모드로 기동되지 않음), 추가로
+`OLLAMA_KV_CACHE_TYPE=q4_0` 설정과 EXAONE의 head 차원 80이 충돌해 모델 로드 자체가 실패한다
+(`K cache type q4_0 with block size 32 does not divide n_embd_head_k=80`). 따라서 채팅은 `OLLAMA_MODEL`,
+임베딩은 `OLLAMA_EMBED_MODEL`(기본 `nomic-embed-text`, 274MB)로 각각 둔다.
+
+**기존 코드 결함 (이 문서 범위 밖, 미수정):** `sherlock_homes`의 `mary_mail_embeddings.embedding`은
+`Vector(1024)`로 선언돼 있으나 채팅 모델(`FakerOrchestrator.embed`)로 임베딩한다. 위 제약 때문에 이 경로는
+현재 동작하지 않으며, 차원도 실제 출력과 일치하지 않는다.
+
 ---
 
 ## 7. 확정이 필요한 결정
 
 착수 전에 답이 필요한 항목이다. 임의로 정하지 않는다.
 
-1. **임베딩 모델** — 기존 `exaone3.5:2.4b`(채팅 모델 겸용, sherlock_homes 방식)를 그대로 쓸지, 전용 임베딩
-   모델(`bge-m3` 등)을 새로 받을지. 차원(`Vector(N)`)이 여기서 결정되고 이후 변경은 마이그레이션을 요구한다.
+1. ~~**임베딩 모델**~~ — **해소됨.** `nomic-embed-text`(768). 근거는 6장 "1~4단계 구현 완료" 참고.
 2. **엔티티 추출 도구** — 이미 설치된 `neo4j-graphrag`로 갈지, `langchain-experimental`을 추가해
    `LLMGraphTransformer`를 쓸지.
 3. **추출 LLM** — 엔티티 추출을 Gemini(요약이 이미 Gemini 경로)로 할지, 로컬 Ollama로 할지. 문서당 호출 수가

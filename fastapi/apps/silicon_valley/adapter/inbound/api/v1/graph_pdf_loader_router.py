@@ -36,4 +36,5 @@ async def upload_pdf(
         id=response.id,
         filename=response.filename,
         summary=response.summary,
+        chunk_count=response.chunk_count,
     )
