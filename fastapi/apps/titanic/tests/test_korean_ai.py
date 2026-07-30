@@ -4,6 +4,8 @@ from kiwipiepy import Kiwi
 
 kiwi = Kiwi()
 
+_OLLAMA_MODEL = "exaone3.5:2.4b"
+
 
 def run_korean_ai(user_text: str) -> str:
     print("\n--- [1단계] 입력 문장 전처리 중... ---")
@@ -15,10 +17,10 @@ def run_korean_ai(user_text: str) -> str:
     nouns = [t.form for t in tokens if t.tag.startswith("NN")]
     print(f"추출된 핵심 명사: {nouns}")
 
-    print("\n--- [2단계] qwen2.5:3b 모델 추론 중... ---")
+    print(f"\n--- [2단계] {_OLLAMA_MODEL} 모델 추론 중... ---")
 
     response = ollama.chat(
-        model="qwen2.5:3b",
+        model=_OLLAMA_MODEL,
         messages=[{"role": "user", "content": cleaned_text}],
         options={"num_gpu": 0},
     )

@@ -1,14 +1,16 @@
+import os
+
 import httpx
 
-_OLLAMA_BASE_URL = "http://localhost:11434"
-_EXAONE_MODEL = "exaone3.5:2.4b"
+_OLLAMA_BASE_URL = os.environ.get("OLLAMA_BASE_URL", "http://localhost:11434")
+_OLLAMA_MODEL = os.environ.get("OLLAMA_MODEL", "exaone3.5:2.4b")
 
 
 class FakerOrchestrator:
     def __init__(
         self,
         base_url: str = _OLLAMA_BASE_URL,
-        model: str = _EXAONE_MODEL,
+        model: str = _OLLAMA_MODEL,
         timeout: float = 60.0,
     ) -> None:
         self.base_url = base_url
