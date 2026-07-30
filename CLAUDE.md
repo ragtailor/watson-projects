@@ -40,6 +40,9 @@ com.ragtailor/
   `fastapi/docker-compose.yml`에서 `dreamscape`를 `external: true`로 선언해 합류만 한다.
   네트워크 생성 순서상 `inception`이 먼저 기동되어 있어야 한다.
 - n8n, neo4j는 dreamscape와 무관한 이 프로젝트만의 로컬 스택이다.
+- compose 프로젝트 이름은 `name: fastapi`로 고정되어 있다. 볼륨·컨테이너 이름의
+  접두어가 되므로(`fastapi_n8n_data`, `fastapi_neo4j_data`) 임의로 바꾸면
+  기존 데이터가 연결되지 않는다.
 - `.env`는 `fastapi/.env`에 둔다 (루트가 아니다). 절대 커밋하지 않으며,
   값 변경 시 `fastapi/.env.example`을 함께 갱신한다.
 

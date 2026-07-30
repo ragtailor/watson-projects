@@ -6,6 +6,11 @@
 #   docker compose -f fastapi/docker-compose.yml up -d      # 루트에서 실행해도 동일
 #
 # nginx/certbot 의 설정·인증서 디렉터리는 저장소 루트에 그대로 두고 ../ 로 참조한다.
+
+# 프로젝트 이름 고정. 볼륨·컨테이너 이름의 접두어가 되므로(fastapi_n8n_data 등)
+# 디렉터리명이나 실행 위치가 바뀌어도 같은 볼륨을 계속 쓰도록 여기서 못 박는다.
+name: fastapi
+
 services:
   # Nginx 리버스 프록시
   nginx:
