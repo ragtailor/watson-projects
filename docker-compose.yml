@@ -42,7 +42,34 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"
 
-  # FastAPI 백엔드 서비스 (DB/Redis는 dreamscape의 limbo/totem 사용, 로컬 pgvector/redis 제거)
+  # PostgreSQL + pgvector — 로컬 개발 전용 (profiles: local-db)
+  # 운영에서는 dreamscape의 공유 DB를 쓰므로 기본 `docker compose up -d`로는 기동되지 않는다.
+  # 로컬에서만: docker compose --profile local-db up -d pgvector
+  # 호스트 5432를 점유하므로 다른 PostgreSQL(inception 등)이 떠 있으면 먼저 내린다.
+  pgvector:
+    image: pgvector/pgvector:pg17
+    profiles:
+      - local-db
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+    volumes:
+      - pgvector_data:/var/lib/postgresql/data
+      # 최초 초기화 시 1회만 실행 — vector 익스텐션 생성
+      - ./docker/pgvector/init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+
+  # FastAPI 백엔드 서비스 (운영 DB/Redis는 dreamscape의 limbo/totem 사용)
+  # 로컬 pgvector는 위 local-db 프로파일로 분리돼 있어 이 서비스의 depends_on에 넣지 않는다.
   api:
     build:
       context: ./fastapi
@@ -105,3 +132,4 @@ networks:
 volumes:
   n8n_data:
   neo4j_data:
+  pgvector_data:
