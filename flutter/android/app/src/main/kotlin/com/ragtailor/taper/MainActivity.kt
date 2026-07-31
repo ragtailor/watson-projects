@@ -1,4 +1,4 @@
-package com.example.taper
+package com.ragtailor.taper
 
 import io.flutter.embedding.android.FlutterActivity
 
