@@ -5,7 +5,8 @@ import 'package:taper/main.dart';
 
 void main() {
   testWidgets('intro screen renders key content', (WidgetTester tester) async {
-    await tester.pumpWidget(const TaperApp());
+    // 앱의 home은 인트로 영상 화면으로 바뀌었으므로 소개 화면을 직접 띄운다.
+    await tester.pumpWidget(const MaterialApp(home: IntroScreen()));
     await tester.pumpAndSettle();
 
     expect(find.text('AI 서비스 개발'), findsOneWidget);
@@ -16,7 +17,8 @@ void main() {
   });
 
   testWidgets('curriculum tags are rendered', (WidgetTester tester) async {
-    await tester.pumpWidget(const TaperApp());
+    // 앱의 home은 인트로 영상 화면으로 바뀌었으므로 소개 화면을 직접 띄운다.
+    await tester.pumpWidget(const MaterialApp(home: IntroScreen()));
     await tester.pumpAndSettle();
 
     expect(find.text('FastAPI'), findsOneWidget);

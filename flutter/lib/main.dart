@@ -1,5 +1,10 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:video_player/video_player.dart';
+
+import 'stopwatch_page.dart';
 
 void main() {
   runApp(const TaperApp());
@@ -24,7 +29,86 @@ class TaperApp extends StatelessWidget {
         useMaterial3: true,
       ),
       themeMode: ThemeMode.system,
-      home: const IntroScreen(),
+      home: const VideoIntroScreen(),
+    );
+  }
+}
+
+/// 인트로 영상을 재생하고 4초 뒤 스톱워치 화면으로 넘어간다.
+///
+/// 영상이 4초보다 길어도 4초에 전환하고, 영상 로드에 실패해도 그냥 넘어간다.
+/// 인트로 때문에 앱이 멈춰 있는 상황을 만들지 않는다.
+class VideoIntroScreen extends StatefulWidget {
+  const VideoIntroScreen({super.key});
+
+  @override
+  State<VideoIntroScreen> createState() => _VideoIntroScreenState();
+}
+
+class _VideoIntroScreenState extends State<VideoIntroScreen> {
+  static const String _videoAsset = 'assets/video/intro.mp4';
+  static const Duration _introDuration = Duration(seconds: 4);
+
+  final VideoPlayerController _controller =
+      VideoPlayerController.asset(_videoAsset);
+  Timer? _timer;
+  bool _navigated = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _playIntro();
+    _timer = Timer(_introDuration, _goToStopwatch);
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    _controller.dispose();
+    super.dispose();
+  }
+
+  Future<void> _playIntro() async {
+    try {
+      await _controller.initialize();
+      if (!mounted) {
+        return;
+      }
+      await _controller.play();
+      setState(() {});
+    } on Object {
+      // 영상 파일이 없거나 코덱을 못 읽어도 인트로만 건너뛴다.
+      _goToStopwatch();
+    }
+  }
+
+  void _goToStopwatch() {
+    if (_navigated || !mounted) {
+      return;
+    }
+    _navigated = true;
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute<void>(builder: (_) => const StopwatchPage()),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.black,
+      body: _controller.value.isInitialized
+          ? SizedBox.expand(
+              // 화면 비율이 달라도 여백 없이 꽉 채운다.
+              child: FittedBox(
+                fit: BoxFit.cover,
+                child: SizedBox(
+                  width: _controller.value.size.width,
+                  height: _controller.value.size.height,
+                  child: VideoPlayer(_controller),
+                ),
+              ),
+            )
+          : const SizedBox.expand(),
     );
   }
 }
