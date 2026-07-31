@@ -25,6 +25,14 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <!-- 네이티브 스톱워치 화면. 런처 아이콘은 만들지 않고 adb 로만 띄운다.
+             adb shell am start -n com.ragtailor.taper/com.ragtailor.stopwatch.StopwatchActivity -->
+        <activity
+            android:name="com.ragtailor.stopwatch.StopwatchActivity"
+            android:label="스톱워치"
+            android:exported="true"
+            android:theme="@android:style/Theme.Material.NoActionBar"
+            android:configChanges="orientation|screenSize|keyboardHidden" />
         <!-- Don't delete the meta-data below.
              This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->
         <meta-data
