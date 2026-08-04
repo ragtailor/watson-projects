@@ -2,8 +2,8 @@ from __future__ import annotations
 
 from abc import ABC, abstractmethod
 
-from tailor.apps.lion_king.adapter.inbound.api.schemas.shaman_ancestors_stars_schema import AncestorsStarsSchema
-from tailor.apps.lion_king.app.dtos.shaman_ancestors_stars_dto import AncestorsStarsResponse
+from lion_king.adapter.inbound.api.schemas.shaman_ancestors_stars_schema import AncestorsStarsSchema
+from lion_king.app.dtos.shaman_ancestors_stars_dto import AncestorsStarsResponse
 
 
 class AncestorsStarsUseCase(ABC):

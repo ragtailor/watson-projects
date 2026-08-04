@@ -1,9 +1,9 @@
 from __future__ import annotations
 
-from tailor.apps.lion_king.adapter.inbound.api.schemas.pride_simba_king_schema import SimbaKingSchema
-from tailor.apps.lion_king.app.dtos.pride_simba_king_dto import SimbaKingQuery, SimbaKingResponse
-from tailor.apps.lion_king.app.ports.input.pride_simba_king_use_case import SimbaKingUseCase
-from tailor.apps.lion_king.app.ports.output.pride_simba_king_repository import SimbaKingRepository
+from lion_king.adapter.inbound.api.schemas.pride_simba_king_schema import SimbaKingSchema
+from lion_king.app.dtos.pride_simba_king_dto import SimbaKingQuery, SimbaKingResponse
+from lion_king.app.ports.input.pride_simba_king_use_case import SimbaKingUseCase
+from lion_king.app.ports.output.pride_simba_king_repository import SimbaKingRepository
 
 
 class SimbaKingInteractor(SimbaKingUseCase):

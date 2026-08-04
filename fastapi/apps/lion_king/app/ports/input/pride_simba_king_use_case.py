@@ -2,8 +2,8 @@ from __future__ import annotations
 
 from abc import ABC, abstractmethod
 
-from tailor.apps.lion_king.adapter.inbound.api.schemas.pride_simba_king_schema import SimbaKingSchema
-from tailor.apps.lion_king.app.dtos.pride_simba_king_dto import SimbaKingResponse
+from lion_king.adapter.inbound.api.schemas.pride_simba_king_schema import SimbaKingSchema
+from lion_king.app.dtos.pride_simba_king_dto import SimbaKingResponse
 
 
 class SimbaKingUseCase(ABC):

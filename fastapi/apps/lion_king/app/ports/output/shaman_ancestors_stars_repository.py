@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from abc import ABC, abstractmethod
 
-from tailor.apps.lion_king.app.dtos.shaman_ancestors_stars_dto import AncestorsStarsQuery, AncestorsStarsResponse
+from lion_king.app.dtos.shaman_ancestors_stars_dto import AncestorsStarsQuery, AncestorsStarsResponse
 
 
 class AncestorsStarsRepository(ABC):

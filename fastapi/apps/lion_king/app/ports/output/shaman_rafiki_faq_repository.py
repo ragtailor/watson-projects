@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from abc import ABC, abstractmethod
 
-from tailor.apps.lion_king.app.dtos.shaman_rafiki_faq_dto import RafikiFaqQuery, RafikiFaqResponse
+from lion_king.app.dtos.shaman_rafiki_faq_dto import RafikiFaqQuery, RafikiFaqResponse
 
 
 class RafikiFaqRepository(ABC):

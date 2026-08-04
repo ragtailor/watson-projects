@@ -1,9 +1,9 @@
 from fastapi import APIRouter, Depends
 
-from tailor.apps.silicon_valley.adapter.inbound.api.schemas.piper_dinesh_dash_schema import DineshDashSchema
-from tailor.apps.silicon_valley.app.dtos.piper_dinesh_dash_dto import DineshDashResponse
-from tailor.apps.silicon_valley.app.ports.input.piper_dinesh_dash_use_case import DineshDashUseCase
-from tailor.apps.silicon_valley.dependencies.piper_dinesh_dash_provider import get_dinesh_dash_use_case
+from silicon_valley.adapter.inbound.api.schemas.piper_dinesh_dash_schema import DineshDashSchema
+from silicon_valley.app.dtos.piper_dinesh_dash_dto import DineshDashResponse
+from silicon_valley.app.ports.input.piper_dinesh_dash_use_case import DineshDashUseCase
+from silicon_valley.dependencies.piper_dinesh_dash_provider import get_dinesh_dash_use_case
 
 '''
 딘에쉬 추그타이 (Dinesh Chugtai)

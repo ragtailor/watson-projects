@@ -1,8 +1,8 @@
 from fastapi import APIRouter, Depends
-from tailor.apps.titanic.adapter.inbound.api.schemas.passenger_jack_trainer_schema import JackTrainerSchema
-from tailor.apps.titanic.app.dtos.passenger_jack_trainer_dto import JackTrainerResponse
-from tailor.apps.titanic.app.ports.input.passenger_jack_trainer_use_case import JackTrainerUseCase
-from tailor.apps.titanic.dependencies.passenger_jack_trainer_provider import get_jack_trainer_use_case
+from titanic.adapter.inbound.api.schemas.passenger_jack_trainer_schema import JackTrainerSchema
+from titanic.app.dtos.passenger_jack_trainer_dto import JackTrainerResponse
+from titanic.app.ports.input.passenger_jack_trainer_use_case import JackTrainerUseCase
+from titanic.dependencies.passenger_jack_trainer_provider import get_jack_trainer_use_case
 
 '''
 잭 도슨 (Jack Dawson)

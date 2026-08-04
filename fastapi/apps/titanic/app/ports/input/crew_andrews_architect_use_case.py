@@ -3,8 +3,8 @@ from __future__ import annotations
 from abc import ABC, abstractmethod
 from typing import Any
 
-from tailor.apps.titanic.adapter.inbound.api.schemas.crew_andrews_architect_schema import AndrewsArchitectSchema
-from tailor.apps.titanic.app.dtos.crew_andrews_architect_dto import AndrewsArchitectResponse
+from titanic.adapter.inbound.api.schemas.crew_andrews_architect_schema import AndrewsArchitectSchema
+from titanic.app.dtos.crew_andrews_architect_dto import AndrewsArchitectResponse
 
 
 class AndrewsArchitectUseCase(ABC):

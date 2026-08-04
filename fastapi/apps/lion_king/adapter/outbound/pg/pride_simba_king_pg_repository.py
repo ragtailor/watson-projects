@@ -5,8 +5,8 @@ import logging
 logger = logging.getLogger(__name__)
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from tailor.apps.lion_king.app.dtos.pride_simba_king_dto import SimbaKingQuery, SimbaKingResponse
-from tailor.apps.lion_king.app.ports.output.pride_simba_king_repository import SimbaKingRepository
+from lion_king.app.dtos.pride_simba_king_dto import SimbaKingQuery, SimbaKingResponse
+from lion_king.app.ports.output.pride_simba_king_repository import SimbaKingRepository
 
 
 class SimbaKingPgRepository(SimbaKingRepository):

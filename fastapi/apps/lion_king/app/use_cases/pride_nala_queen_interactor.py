@@ -1,9 +1,9 @@
 from __future__ import annotations
 
-from tailor.apps.lion_king.adapter.inbound.api.schemas.pride_nala_queen_schema import NalaQueenSchema
-from tailor.apps.lion_king.app.dtos.pride_nala_queen_dto import NalaQueenQuery, NalaQueenResponse
-from tailor.apps.lion_king.app.ports.input.pride_nala_queen_use_case import NalaQueenUseCase
-from tailor.apps.lion_king.app.ports.output.pride_nala_queen_repository import NalaQueenRepository
+from lion_king.adapter.inbound.api.schemas.pride_nala_queen_schema import NalaQueenSchema
+from lion_king.app.dtos.pride_nala_queen_dto import NalaQueenQuery, NalaQueenResponse
+from lion_king.app.ports.input.pride_nala_queen_use_case import NalaQueenUseCase
+from lion_king.app.ports.output.pride_nala_queen_repository import NalaQueenRepository
 
 
 class NalaQueenInteractor(NalaQueenUseCase):

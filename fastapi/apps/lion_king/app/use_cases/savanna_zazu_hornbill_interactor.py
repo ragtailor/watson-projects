@@ -1,9 +1,9 @@
 from __future__ import annotations
 
-from tailor.apps.lion_king.adapter.inbound.api.schemas.savanna_zazu_hornbill_schema import ZazuHornbillSchema
-from tailor.apps.lion_king.app.dtos.savanna_zazu_hornbill_dto import ZazuHornbillQuery, ZazuHornbillResponse
-from tailor.apps.lion_king.app.ports.input.savanna_zazu_hornbill_use_case import ZazuHornbillUseCase
-from tailor.apps.lion_king.app.ports.output.savanna_zazu_hornbill_repository import ZazuHornbillRepository
+from lion_king.adapter.inbound.api.schemas.savanna_zazu_hornbill_schema import ZazuHornbillSchema
+from lion_king.app.dtos.savanna_zazu_hornbill_dto import ZazuHornbillQuery, ZazuHornbillResponse
+from lion_king.app.ports.input.savanna_zazu_hornbill_use_case import ZazuHornbillUseCase
+from lion_king.app.ports.output.savanna_zazu_hornbill_repository import ZazuHornbillRepository
 
 
 class ZazuHornbillInteractor(ZazuHornbillUseCase):

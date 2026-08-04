@@ -1,9 +1,9 @@
 from fastapi import APIRouter, Depends
 
-from tailor.apps.silicon_valley.adapter.inbound.api.schemas.piper_henricks_ceo_schema import HenricksCeoSchema
-from tailor.apps.silicon_valley.app.dtos.piper_henricks_ceo_dto import HenricksCeoResponse
-from tailor.apps.silicon_valley.app.ports.input.piper_henricks_ceo_use_case import HenricksCeoUseCase
-from tailor.apps.silicon_valley.dependencies.piper_henricks_ceo_provider import get_henricks_ceo_use_case
+from silicon_valley.adapter.inbound.api.schemas.piper_henricks_ceo_schema import HenricksCeoSchema
+from silicon_valley.app.dtos.piper_henricks_ceo_dto import HenricksCeoResponse
+from silicon_valley.app.ports.input.piper_henricks_ceo_use_case import HenricksCeoUseCase
+from silicon_valley.dependencies.piper_henricks_ceo_provider import get_henricks_ceo_use_case
 
 '''
 리차드 헨드릭스 (Richard Hendricks)

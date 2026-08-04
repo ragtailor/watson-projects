@@ -1,7 +1,7 @@
 import logging
 
 from fastapi import APIRouter, Depends
-from tailor.apps.titanic.adapter.inbound.api.schemas.crew_walter_roaster_schema import WalterRoasterSchema
+from titanic.adapter.inbound.api.schemas.crew_walter_roaster_schema import WalterRoasterSchema
 from titanic.app.dtos.crew_walter_roaster_dto import WalterRoasterResponse
 from titanic.app.ports.input.crew_walter_roaster_use_case import WalterRoasterUseCase
 from titanic.dependencies.crew_walter_roaster_provider import get_walter_roaster_use_case

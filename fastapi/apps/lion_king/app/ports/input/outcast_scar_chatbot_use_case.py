@@ -2,8 +2,8 @@ from __future__ import annotations
 
 from abc import ABC, abstractmethod
 
-from tailor.apps.lion_king.adapter.inbound.api.schemas.outcast_scar_chatbot_schema import ScarChatbotSchema
-from tailor.apps.lion_king.app.dtos.outcast_scar_chatbot_dto import ScarChatbotResponse
+from lion_king.adapter.inbound.api.schemas.outcast_scar_chatbot_schema import ScarChatbotSchema
+from lion_king.app.dtos.outcast_scar_chatbot_dto import ScarChatbotResponse
 
 
 class ScarChatbotUseCase(ABC):

@@ -5,8 +5,8 @@ import logging
 logger = logging.getLogger(__name__)
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from tailor.apps.lion_king.app.dtos.pride_nala_queen_dto import NalaQueenQuery, NalaQueenResponse
-from tailor.apps.lion_king.app.ports.output.pride_nala_queen_repository import NalaQueenRepository
+from lion_king.app.dtos.pride_nala_queen_dto import NalaQueenQuery, NalaQueenResponse
+from lion_king.app.ports.output.pride_nala_queen_repository import NalaQueenRepository
 
 
 class NalaQueenPgRepository(NalaQueenRepository):

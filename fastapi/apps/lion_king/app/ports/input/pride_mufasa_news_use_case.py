@@ -2,8 +2,8 @@ from __future__ import annotations
 
 from abc import ABC, abstractmethod
 
-from tailor.apps.lion_king.adapter.inbound.api.schemas.pride_mufasa_news_schema import MufasaNewsSchema
-from tailor.apps.lion_king.app.dtos.pride_mufasa_news_dto import MufasaNewsResponse
+from lion_king.adapter.inbound.api.schemas.pride_mufasa_news_schema import MufasaNewsSchema
+from lion_king.app.dtos.pride_mufasa_news_dto import MufasaNewsResponse
 
 
 class MufasaNewsUseCase(ABC):

@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from abc import ABC, abstractmethod
 
-from tailor.apps.lion_king.app.dtos.pride_nala_queen_dto import NalaQueenQuery, NalaQueenResponse
+from lion_king.app.dtos.pride_nala_queen_dto import NalaQueenQuery, NalaQueenResponse
 
 
 class NalaQueenRepository(ABC):

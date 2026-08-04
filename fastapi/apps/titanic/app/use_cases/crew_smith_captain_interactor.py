@@ -5,16 +5,16 @@ import logging
 from pandas import DataFrame
 from typing import Dict, Any, List
 
-from tailor.apps.titanic.adapter.inbound.api.schemas.crew_smith_captain_schema import ChatSchema, SmithCaptainSchema
-from tailor.apps.titanic.app.dtos.crew_smith_captain_dto import SmithCaptainQuery, SmithCaptainResponse, ChatResponse, ReportSummaryResponse
-from tailor.apps.titanic.app.ports.input.crew_andrews_architect_use_case import AndrewsArchitectUseCase
-from tailor.apps.titanic.app.ports.input.crew_hartley_violin_use_case import HartleyViolinUseCase
-from tailor.apps.titanic.app.ports.input.crew_smith_captain_use_case import SmithCaptainUseCase
-from tailor.apps.titanic.app.ports.input.passenger_jack_trainer_use_case import JackTrainerUseCase
-from tailor.apps.titanic.app.ports.input.passenger_rose_model_use_case import RoseModelUseCase
-from tailor.apps.titanic.app.ports.input.passenger_cal_tester_use_case import CalTesterUseCase
-from tailor.apps.titanic.app.ports.input.crew_lowe_boat_use_case import LoweBoatUseCase
-from tailor.apps.titanic.app.ports.input.crew_walter_roaster_use_case import WalterRoasterUseCase
+from titanic.adapter.inbound.api.schemas.crew_smith_captain_schema import ChatSchema, SmithCaptainSchema
+from titanic.app.dtos.crew_smith_captain_dto import SmithCaptainQuery, SmithCaptainResponse, ChatResponse, ReportSummaryResponse
+from titanic.app.ports.input.crew_andrews_architect_use_case import AndrewsArchitectUseCase
+from titanic.app.ports.input.crew_hartley_violin_use_case import HartleyViolinUseCase
+from titanic.app.ports.input.crew_smith_captain_use_case import SmithCaptainUseCase
+from titanic.app.ports.input.passenger_jack_trainer_use_case import JackTrainerUseCase
+from titanic.app.ports.input.passenger_rose_model_use_case import RoseModelUseCase
+from titanic.app.ports.input.passenger_cal_tester_use_case import CalTesterUseCase
+from titanic.app.ports.input.crew_lowe_boat_use_case import LoweBoatUseCase
+from titanic.app.ports.input.crew_walter_roaster_use_case import WalterRoasterUseCase
 from titanic.app.ports.output.crew_smith_captain_port import SmithCaptainPort
 from titanic.adapter.inbound.api.schemas.passenger_ruth_validation_schema import RuthValidationSchema
 

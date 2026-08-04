@@ -5,8 +5,8 @@ import logging
 logger = logging.getLogger(__name__)
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from tailor.apps.lion_king.app.dtos.savanna_timon_meerkat_dto import TimonMeerkatQuery, TimonMeerkatResponse
-from tailor.apps.lion_king.app.ports.output.savanna_timon_meerkat_repository import TimonMeerkatRepository
+from lion_king.app.dtos.savanna_timon_meerkat_dto import TimonMeerkatQuery, TimonMeerkatResponse
+from lion_king.app.ports.output.savanna_timon_meerkat_repository import TimonMeerkatRepository
 
 
 class TimonMeerkatPgRepository(TimonMeerkatRepository):

@@ -8,7 +8,7 @@ logger = logging.getLogger(__name__)
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from tailor.apps.titanic.app.dtos.passenger_rose_model_dto import RoseModelQuery, RoseModelResponse
+from titanic.app.dtos.passenger_rose_model_dto import RoseModelQuery, RoseModelResponse
 from titanic.adapter.outbound.orm.crew_smith_captain_orm import SmithCaptainOrm as BookingOrm
 from titanic.adapter.outbound.orm.passenger_jack_trainer_orm import JackTrainerOrm as PersonOrm
 

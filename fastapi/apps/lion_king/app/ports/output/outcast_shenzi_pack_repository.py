@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from abc import ABC, abstractmethod
 
-from tailor.apps.lion_king.app.dtos.outcast_shenzi_pack_dto import ShenziPackQuery, ShenziPackResponse
+from lion_king.app.dtos.outcast_shenzi_pack_dto import ShenziPackQuery, ShenziPackResponse
 
 
 class ShenziPackRepository(ABC):

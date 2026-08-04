@@ -4,7 +4,7 @@ from abc import ABC, abstractmethod
 
 import pandas as pd
 
-from tailor.apps.titanic.app.dtos.crew_lowe_boat_dto import LoweBoatQuery, LoweBoatResponse
+from titanic.app.dtos.crew_lowe_boat_dto import LoweBoatQuery, LoweBoatResponse
 
 
 class LoweBoatPort(ABC):

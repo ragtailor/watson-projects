@@ -5,8 +5,8 @@ import logging
 logger = logging.getLogger(__name__)
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from tailor.apps.lion_king.app.dtos.outcast_shenzi_pack_dto import ShenziPackQuery, ShenziPackResponse
-from tailor.apps.lion_king.app.ports.output.outcast_shenzi_pack_repository import ShenziPackRepository
+from lion_king.app.dtos.outcast_shenzi_pack_dto import ShenziPackQuery, ShenziPackResponse
+from lion_king.app.ports.output.outcast_shenzi_pack_repository import ShenziPackRepository
 
 
 class ShenziPackPgRepository(ShenziPackRepository):

@@ -5,7 +5,7 @@ import logging
 logger = logging.getLogger(__name__)
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from tailor.apps.titanic.app.dtos.passenger_molly_scaler_dto import MollyScalerQuery, MollyScalerResponse
+from titanic.app.dtos.passenger_molly_scaler_dto import MollyScalerQuery, MollyScalerResponse
 
 
 class MollyScalerRepository:

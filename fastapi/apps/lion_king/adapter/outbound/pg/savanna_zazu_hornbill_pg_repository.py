@@ -5,8 +5,8 @@ import logging
 logger = logging.getLogger(__name__)
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from tailor.apps.lion_king.app.dtos.savanna_zazu_hornbill_dto import ZazuHornbillQuery, ZazuHornbillResponse
-from tailor.apps.lion_king.app.ports.output.savanna_zazu_hornbill_repository import ZazuHornbillRepository
+from lion_king.app.dtos.savanna_zazu_hornbill_dto import ZazuHornbillQuery, ZazuHornbillResponse
+from lion_king.app.ports.output.savanna_zazu_hornbill_repository import ZazuHornbillRepository
 
 
 class ZazuHornbillPgRepository(ZazuHornbillRepository):

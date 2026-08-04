@@ -5,8 +5,8 @@ import logging
 logger = logging.getLogger(__name__)
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from tailor.apps.lion_king.app.dtos.pride_sarabi_guardian_dto import SarabiGuardianQuery, SarabiGuardianResponse
-from tailor.apps.lion_king.app.ports.output.pride_sarabi_guardian_repository import SarabiGuardianRepository
+from lion_king.app.dtos.pride_sarabi_guardian_dto import SarabiGuardianQuery, SarabiGuardianResponse
+from lion_king.app.ports.output.pride_sarabi_guardian_repository import SarabiGuardianRepository
 
 
 class SarabiGuardianPgRepository(SarabiGuardianRepository):

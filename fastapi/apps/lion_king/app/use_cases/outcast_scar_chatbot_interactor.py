@@ -1,9 +1,9 @@
 from __future__ import annotations
 
-from tailor.apps.lion_king.adapter.inbound.api.schemas.outcast_scar_chatbot_schema import ScarChatbotSchema
-from tailor.apps.lion_king.app.dtos.outcast_scar_chatbot_dto import ScarChatbotQuery, ScarChatbotResponse
-from tailor.apps.lion_king.app.ports.input.outcast_scar_chatbot_use_case import ScarChatbotUseCase
-from tailor.apps.lion_king.app.ports.output.outcast_scar_chatbot_repository import ScarChatbotRepository
+from lion_king.adapter.inbound.api.schemas.outcast_scar_chatbot_schema import ScarChatbotSchema
+from lion_king.app.dtos.outcast_scar_chatbot_dto import ScarChatbotQuery, ScarChatbotResponse
+from lion_king.app.ports.input.outcast_scar_chatbot_use_case import ScarChatbotUseCase
+from lion_king.app.ports.output.outcast_scar_chatbot_repository import ScarChatbotRepository
 
 
 class ScarChatbotInteractor(ScarChatbotUseCase):

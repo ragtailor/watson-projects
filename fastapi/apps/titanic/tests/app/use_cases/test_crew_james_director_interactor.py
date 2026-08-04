@@ -3,7 +3,7 @@ from unittest.mock import AsyncMock, MagicMock
 
 from titanic.app.use_cases.crew_james_director_interactor import JamesDirectorInteractor
 from titanic.app.dtos.crew_james_director_dto import JamesDirectorQuery, JamesDirectorResponse
-from tailor.apps.titanic.adapter.inbound.api.schemas.crew_james_director_schema import (
+from titanic.adapter.inbound.api.schemas.crew_james_director_schema import (
     FileUploadSchema,
     JamesDirectorSchema,
 )

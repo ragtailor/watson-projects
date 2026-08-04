@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from abc import ABC, abstractmethod
 
-from tailor.apps.lion_king.app.dtos.pride_simba_king_dto import SimbaKingQuery, SimbaKingResponse
+from lion_king.app.dtos.pride_simba_king_dto import SimbaKingQuery, SimbaKingResponse
 
 
 class SimbaKingRepository(ABC):

@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from abc import ABC, abstractmethod
 
-from tailor.apps.lion_king.app.dtos.outcast_hyena_graveyard_dto import HyenaGraveyardQuery, HyenaGraveyardResponse
+from lion_king.app.dtos.outcast_hyena_graveyard_dto import HyenaGraveyardQuery, HyenaGraveyardResponse
 
 
 class HyenaGraveyardRepository(ABC):

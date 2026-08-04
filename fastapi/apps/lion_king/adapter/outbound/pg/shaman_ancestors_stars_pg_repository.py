@@ -5,8 +5,8 @@ import logging
 logger = logging.getLogger(__name__)
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from tailor.apps.lion_king.app.dtos.shaman_ancestors_stars_dto import AncestorsStarsQuery, AncestorsStarsResponse
-from tailor.apps.lion_king.app.ports.output.shaman_ancestors_stars_repository import AncestorsStarsRepository
+from lion_king.app.dtos.shaman_ancestors_stars_dto import AncestorsStarsQuery, AncestorsStarsResponse
+from lion_king.app.ports.output.shaman_ancestors_stars_repository import AncestorsStarsRepository
 
 
 class AncestorsStarsPgRepository(AncestorsStarsRepository):

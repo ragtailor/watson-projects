@@ -8,10 +8,10 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from pandas import DataFrame
 
-from tailor.apps.titanic.adapter.inbound.api.schemas.crew_hartley_violin_schema import HartleyViolinSchema
-from tailor.apps.titanic.app.dtos.crew_hartley_violin_dto import HartleyViolinQuery, HartleyViolinResponse
-from tailor.apps.titanic.app.ports.input.crew_hartley_violin_use_case import HartleyViolinUseCase
-from tailor.apps.titanic.app.ports.output.crew_hartley_violin_port import HartleyViolinPort
+from titanic.adapter.inbound.api.schemas.crew_hartley_violin_schema import HartleyViolinSchema
+from titanic.app.dtos.crew_hartley_violin_dto import HartleyViolinQuery, HartleyViolinResponse
+from titanic.app.ports.input.crew_hartley_violin_use_case import HartleyViolinUseCase
+from titanic.app.ports.output.crew_hartley_violin_port import HartleyViolinPort
 
 
 class HartleyViolinInteractor(HartleyViolinUseCase):

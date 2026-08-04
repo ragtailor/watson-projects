@@ -3,7 +3,7 @@ from __future__ import annotations
 from abc import ABC, abstractmethod
 from typing import Any
 
-from tailor.apps.titanic.app.dtos.passenger_rose_model_dto import RoseModelQuery, RoseModelResponse
+from titanic.app.dtos.passenger_rose_model_dto import RoseModelQuery, RoseModelResponse
 
 
 class RoseModelPort(ABC):

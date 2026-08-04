@@ -2,7 +2,7 @@ from typing import Any
 
 import pandas as pd
 
-from tailor.apps.titanic.adapter.inbound.api.schemas.crew_walter_roaster_schema import WalterRoasterSchema
+from titanic.adapter.inbound.api.schemas.crew_walter_roaster_schema import WalterRoasterSchema
 from titanic.app.dtos.crew_walter_roaster_dto import WalterRoasterQuery, WalterRoasterResponse
 from titanic.app.ports.input.crew_walter_roaster_use_case import WalterRoasterUseCase
 from titanic.app.ports.output.crew_walter_roaster_port import WalterRoasterPort

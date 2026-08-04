@@ -2,8 +2,8 @@ from __future__ import annotations
 
 from abc import ABC, abstractmethod
 
-from tailor.apps.lion_king.adapter.inbound.api.schemas.pride_nala_queen_schema import NalaQueenSchema
-from tailor.apps.lion_king.app.dtos.pride_nala_queen_dto import NalaQueenResponse
+from lion_king.adapter.inbound.api.schemas.pride_nala_queen_schema import NalaQueenSchema
+from lion_king.app.dtos.pride_nala_queen_dto import NalaQueenResponse
 
 
 class NalaQueenUseCase(ABC):

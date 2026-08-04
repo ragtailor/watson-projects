@@ -5,8 +5,8 @@ import logging
 logger = logging.getLogger(__name__)
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from tailor.apps.lion_king.app.dtos.outcast_scar_chatbot_dto import ScarChatbotQuery, ScarChatbotResponse
-from tailor.apps.lion_king.app.ports.output.outcast_scar_chatbot_repository import ScarChatbotRepository
+from lion_king.app.dtos.outcast_scar_chatbot_dto import ScarChatbotQuery, ScarChatbotResponse
+from lion_king.app.ports.output.outcast_scar_chatbot_repository import ScarChatbotRepository
 
 
 class ScarChatbotPgRepository(ScarChatbotRepository):

@@ -1,9 +1,9 @@
 from __future__ import annotations
 
-from tailor.apps.lion_king.adapter.inbound.api.schemas.pride_sarabi_guardian_schema import SarabiGuardianSchema
-from tailor.apps.lion_king.app.dtos.pride_sarabi_guardian_dto import SarabiGuardianQuery, SarabiGuardianResponse
-from tailor.apps.lion_king.app.ports.input.pride_sarabi_guardian_use_case import SarabiGuardianUseCase
-from tailor.apps.lion_king.app.ports.output.pride_sarabi_guardian_repository import SarabiGuardianRepository
+from lion_king.adapter.inbound.api.schemas.pride_sarabi_guardian_schema import SarabiGuardianSchema
+from lion_king.app.dtos.pride_sarabi_guardian_dto import SarabiGuardianQuery, SarabiGuardianResponse
+from lion_king.app.ports.input.pride_sarabi_guardian_use_case import SarabiGuardianUseCase
+from lion_king.app.ports.output.pride_sarabi_guardian_repository import SarabiGuardianRepository
 
 
 class SarabiGuardianInteractor(SarabiGuardianUseCase):

@@ -1,10 +1,10 @@
 from fastapi import APIRouter
 from fastapi import APIRouter, Depends
 
-from tailor.apps.titanic.adapter.inbound.api.schemas.crew_andrews_architect_schema import AndrewsArchitectSchema
-from tailor.apps.titanic.app.dtos.crew_andrews_architect_dto import AndrewsArchitectResponse
-from tailor.apps.titanic.app.ports.input.crew_andrews_architect_use_case import AndrewsArchitectUseCase
-from tailor.apps.titanic.dependencies.crew_walter_roaster_provider import get_walter_roaster_use_case
+from titanic.adapter.inbound.api.schemas.crew_andrews_architect_schema import AndrewsArchitectSchema
+from titanic.app.dtos.crew_andrews_architect_dto import AndrewsArchitectResponse
+from titanic.app.ports.input.crew_andrews_architect_use_case import AndrewsArchitectUseCase
+from titanic.dependencies.crew_walter_roaster_provider import get_walter_roaster_use_case
 '''
 토마스 앤드류스 (Thomas Andrews)
 타이타닉을 설계한 수석 디자이너입니다. 배의 침몰을 가장 먼저 직감하고, 마지막 순간 흡연실 시계 앞에서 죄책감에 잠겨 있던 모습이 관객들에게 깊은 여운을 남겼습니다. 시스템의 구조나 메타데이터를 다루는 역할로 좋습니다.

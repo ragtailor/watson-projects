@@ -6,7 +6,7 @@ from typing import Any
 import numpy as np
 import pandas as pd
 
-from tailor.apps.titanic.adapter.outbound.orm.passenger_rose_model_strategies import build_all_strategies
+from titanic.adapter.outbound.orm.passenger_rose_model_strategies import build_all_strategies
 from titanic.adapter.inbound.api.schemas.passenger_jack_trainer_schema import JackTrainerSchema
 from titanic.app.dtos.passenger_jack_trainer_dto import JackTrainerQuery, JackTrainerResponse
 from titanic.app.ports.output.passenger_jack_trainer_port import JackTrainerPort

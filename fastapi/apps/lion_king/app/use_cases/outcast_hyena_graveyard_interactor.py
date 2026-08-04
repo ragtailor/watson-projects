@@ -1,9 +1,9 @@
 from __future__ import annotations
 
-from tailor.apps.lion_king.adapter.inbound.api.schemas.outcast_hyena_graveyard_schema import HyenaGraveyardSchema
-from tailor.apps.lion_king.app.dtos.outcast_hyena_graveyard_dto import HyenaGraveyardQuery, HyenaGraveyardResponse
-from tailor.apps.lion_king.app.ports.input.outcast_hyena_graveyard_use_case import HyenaGraveyardUseCase
-from tailor.apps.lion_king.app.ports.output.outcast_hyena_graveyard_repository import HyenaGraveyardRepository
+from lion_king.adapter.inbound.api.schemas.outcast_hyena_graveyard_schema import HyenaGraveyardSchema
+from lion_king.app.dtos.outcast_hyena_graveyard_dto import HyenaGraveyardQuery, HyenaGraveyardResponse
+from lion_king.app.ports.input.outcast_hyena_graveyard_use_case import HyenaGraveyardUseCase
+from lion_king.app.ports.output.outcast_hyena_graveyard_repository import HyenaGraveyardRepository
 
 
 class HyenaGraveyardInteractor(HyenaGraveyardUseCase):

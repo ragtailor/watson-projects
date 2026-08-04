@@ -4,8 +4,8 @@ from abc import ABC, abstractmethod
 
 import pandas as pd
 
-from tailor.apps.titanic.adapter.inbound.api.schemas.crew_lowe_boat_schema import LoweBoatSchema
-from tailor.apps.titanic.app.dtos.crew_lowe_boat_dto import LoweBoatResponse
+from titanic.adapter.inbound.api.schemas.crew_lowe_boat_schema import LoweBoatSchema
+from titanic.app.dtos.crew_lowe_boat_dto import LoweBoatResponse
 
 
 class LoweBoatUseCase(ABC):

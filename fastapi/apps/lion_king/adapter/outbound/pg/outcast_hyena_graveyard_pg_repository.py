@@ -5,8 +5,8 @@ import logging
 logger = logging.getLogger(__name__)
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from tailor.apps.lion_king.app.dtos.outcast_hyena_graveyard_dto import HyenaGraveyardQuery, HyenaGraveyardResponse
-from tailor.apps.lion_king.app.ports.output.outcast_hyena_graveyard_repository import HyenaGraveyardRepository
+from lion_king.app.dtos.outcast_hyena_graveyard_dto import HyenaGraveyardQuery, HyenaGraveyardResponse
+from lion_king.app.ports.output.outcast_hyena_graveyard_repository import HyenaGraveyardRepository
 
 
 class HyenaGraveyardPgRepository(HyenaGraveyardRepository):

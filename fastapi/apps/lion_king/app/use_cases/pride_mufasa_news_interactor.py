@@ -1,9 +1,9 @@
 from __future__ import annotations
 
-from tailor.apps.lion_king.adapter.inbound.api.schemas.pride_mufasa_news_schema import MufasaNewsSchema
-from tailor.apps.lion_king.app.dtos.pride_mufasa_news_dto import MufasaNewsQuery, MufasaNewsResponse
-from tailor.apps.lion_king.app.ports.input.pride_mufasa_news_use_case import MufasaNewsUseCase
-from tailor.apps.lion_king.app.ports.output.pride_mufasa_news_repository import MufasaNewsRepository
+from lion_king.adapter.inbound.api.schemas.pride_mufasa_news_schema import MufasaNewsSchema
+from lion_king.app.dtos.pride_mufasa_news_dto import MufasaNewsQuery, MufasaNewsResponse
+from lion_king.app.ports.input.pride_mufasa_news_use_case import MufasaNewsUseCase
+from lion_king.app.ports.output.pride_mufasa_news_repository import MufasaNewsRepository
 
 
 class MufasaNewsInteractor(MufasaNewsUseCase):

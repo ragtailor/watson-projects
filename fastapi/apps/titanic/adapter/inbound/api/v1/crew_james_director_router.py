@@ -3,7 +3,7 @@ import csv
 
 from fastapi import APIRouter, Depends, File, HTTPException, UploadFile
 
-from tailor.apps.titanic.adapter.inbound.api.schemas.crew_james_director_schema import JamesDirectorSchema, FileUploadSchema, UploadResultSchema
+from titanic.adapter.inbound.api.schemas.crew_james_director_schema import JamesDirectorSchema, FileUploadSchema, UploadResultSchema
 from titanic.app.ports.input.crew_james_director_use_case import JamesDirectorUseCase
 from titanic.dependencies.crew_james_director_provider import get_james_director_use_case
 

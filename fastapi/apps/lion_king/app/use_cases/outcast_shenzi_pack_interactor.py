@@ -1,9 +1,9 @@
 from __future__ import annotations
 
-from tailor.apps.lion_king.adapter.inbound.api.schemas.outcast_shenzi_pack_schema import ShenziPackSchema
-from tailor.apps.lion_king.app.dtos.outcast_shenzi_pack_dto import ShenziPackQuery, ShenziPackResponse
-from tailor.apps.lion_king.app.ports.input.outcast_shenzi_pack_use_case import ShenziPackUseCase
-from tailor.apps.lion_king.app.ports.output.outcast_shenzi_pack_repository import ShenziPackRepository
+from lion_king.adapter.inbound.api.schemas.outcast_shenzi_pack_schema import ShenziPackSchema
+from lion_king.app.dtos.outcast_shenzi_pack_dto import ShenziPackQuery, ShenziPackResponse
+from lion_king.app.ports.input.outcast_shenzi_pack_use_case import ShenziPackUseCase
+from lion_king.app.ports.output.outcast_shenzi_pack_repository import ShenziPackRepository
 
 
 class ShenziPackInteractor(ShenziPackUseCase):

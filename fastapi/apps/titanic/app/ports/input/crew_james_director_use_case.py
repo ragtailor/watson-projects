@@ -4,9 +4,9 @@ from abc import ABC, abstractmethod
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from tailor.apps.titanic.adapter.inbound.api.schemas.crew_james_director_schema import JamesDirectorSchema, FileUploadSchema
+    from titanic.adapter.inbound.api.schemas.crew_james_director_schema import JamesDirectorSchema, FileUploadSchema
 
-from tailor.apps.titanic.app.dtos.crew_james_director_dto import JamesDirectorResponse
+from titanic.app.dtos.crew_james_director_dto import JamesDirectorResponse
 
 
 class JamesDirectorUseCase(ABC):

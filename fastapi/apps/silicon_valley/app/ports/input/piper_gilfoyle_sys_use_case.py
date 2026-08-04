@@ -2,8 +2,8 @@ from __future__ import annotations
 
 from abc import ABC, abstractmethod
 
-from tailor.apps.silicon_valley.adapter.inbound.api.schemas.piper_gilfoyle_sys_schema import GilfoyleSysSchema
-from tailor.apps.silicon_valley.app.dtos.piper_gilfoyle_sys_dto import GilfoyleSysResponse
+from silicon_valley.adapter.inbound.api.schemas.piper_gilfoyle_sys_schema import GilfoyleSysSchema
+from silicon_valley.app.dtos.piper_gilfoyle_sys_dto import GilfoyleSysResponse
 
 
 class GilfoyleSysUseCase(ABC):

@@ -1,8 +1,8 @@
 from fastapi import APIRouter, Depends, Query
 
-from tailor.apps.titanic.adapter.inbound.api.schemas.passenger_ruth_validation_schema import RuthValidationSchema
-from tailor.apps.titanic.app.ports.input.passenger_ruth_validation_use_case import RuthValidationUseCase
-from tailor.apps.titanic.dependencies.passenger_ruth_validation_provider import get_ruth_validation_use_case
+from titanic.adapter.inbound.api.schemas.passenger_ruth_validation_schema import RuthValidationSchema
+from titanic.app.ports.input.passenger_ruth_validation_use_case import RuthValidationUseCase
+from titanic.dependencies.passenger_ruth_validation_provider import get_ruth_validation_use_case
 
 '''
 루스 드윗 부카터 (Ruth DeWitt Bukater)

@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from abc import ABC, abstractmethod
 
-from tailor.apps.lion_king.app.dtos.savanna_pumba_warthog_dto import PumbaWarthogQuery, PumbaWarthogResponse
+from lion_king.app.dtos.savanna_pumba_warthog_dto import PumbaWarthogQuery, PumbaWarthogResponse
 
 
 class PumbaWarthogRepository(ABC):

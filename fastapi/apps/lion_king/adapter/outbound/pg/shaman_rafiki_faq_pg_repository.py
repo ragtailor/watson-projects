@@ -5,8 +5,8 @@ import logging
 logger = logging.getLogger(__name__)
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from tailor.apps.lion_king.app.dtos.shaman_rafiki_faq_dto import RafikiFaqQuery, RafikiFaqResponse
-from tailor.apps.lion_king.app.ports.output.shaman_rafiki_faq_repository import RafikiFaqRepository
+from lion_king.app.dtos.shaman_rafiki_faq_dto import RafikiFaqQuery, RafikiFaqResponse
+from lion_king.app.ports.output.shaman_rafiki_faq_repository import RafikiFaqRepository
 
 
 class RafikiFaqPgRepository(RafikiFaqRepository):

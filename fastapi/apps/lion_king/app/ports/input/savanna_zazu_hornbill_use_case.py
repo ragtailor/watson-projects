@@ -2,8 +2,8 @@ from __future__ import annotations
 
 from abc import ABC, abstractmethod
 
-from tailor.apps.lion_king.adapter.inbound.api.schemas.savanna_zazu_hornbill_schema import ZazuHornbillSchema
-from tailor.apps.lion_king.app.dtos.savanna_zazu_hornbill_dto import ZazuHornbillResponse
+from lion_king.adapter.inbound.api.schemas.savanna_zazu_hornbill_schema import ZazuHornbillSchema
+from lion_king.app.dtos.savanna_zazu_hornbill_dto import ZazuHornbillResponse
 
 
 class ZazuHornbillUseCase(ABC):

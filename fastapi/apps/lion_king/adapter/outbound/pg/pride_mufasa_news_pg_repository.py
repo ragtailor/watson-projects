@@ -5,8 +5,8 @@ import logging
 logger = logging.getLogger(__name__)
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from tailor.apps.lion_king.app.dtos.pride_mufasa_news_dto import MufasaNewsQuery, MufasaNewsResponse
-from tailor.apps.lion_king.app.ports.output.pride_mufasa_news_repository import MufasaNewsRepository
+from lion_king.app.dtos.pride_mufasa_news_dto import MufasaNewsQuery, MufasaNewsResponse
+from lion_king.app.ports.output.pride_mufasa_news_repository import MufasaNewsRepository
 
 
 class MufasaNewsPgRepository(MufasaNewsRepository):

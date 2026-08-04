@@ -2,10 +2,10 @@ from __future__ import annotations
 
 from typing import Any
 
-from tailor.apps.titanic.adapter.inbound.api.schemas.passenger_rose_model_schema import RoseModelSchema
+from titanic.adapter.inbound.api.schemas.passenger_rose_model_schema import RoseModelSchema
 from titanic.adapter.outbound.orm.passenger_rose_model_strategies import RandomForestStrategy
-from tailor.apps.titanic.app.dtos.passenger_rose_model_dto import RoseModelQuery, RoseModelResponse
-from tailor.apps.titanic.app.ports.input.passenger_rose_model_use_case import RoseModelUseCase, SurvivalModelStrategy
+from titanic.app.dtos.passenger_rose_model_dto import RoseModelQuery, RoseModelResponse
+from titanic.app.ports.input.passenger_rose_model_use_case import RoseModelUseCase, SurvivalModelStrategy
 from titanic.app.ports.output.passenger_rose_model_port import RoseModelPort
 
 

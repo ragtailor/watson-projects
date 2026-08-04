@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from abc import ABC, abstractmethod
 
-from tailor.apps.silicon_valley.app.dtos.piper_henricks_ceo_dto import HenricksCeoQuery, HenricksCeoResponse
+from silicon_valley.app.dtos.piper_henricks_ceo_dto import HenricksCeoQuery, HenricksCeoResponse
 
 
 class HenricksCeoPort(ABC):

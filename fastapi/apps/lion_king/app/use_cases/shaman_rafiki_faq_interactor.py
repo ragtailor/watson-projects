@@ -1,9 +1,9 @@
 from __future__ import annotations
 
-from tailor.apps.lion_king.adapter.inbound.api.schemas.shaman_rafiki_faq_schema import RafikiFaqSchema
-from tailor.apps.lion_king.app.dtos.shaman_rafiki_faq_dto import RafikiFaqQuery, RafikiFaqResponse
-from tailor.apps.lion_king.app.ports.input.shaman_rafiki_faq_use_case import RafikiFaqUseCase
-from tailor.apps.lion_king.app.ports.output.shaman_rafiki_faq_repository import RafikiFaqRepository
+from lion_king.adapter.inbound.api.schemas.shaman_rafiki_faq_schema import RafikiFaqSchema
+from lion_king.app.dtos.shaman_rafiki_faq_dto import RafikiFaqQuery, RafikiFaqResponse
+from lion_king.app.ports.input.shaman_rafiki_faq_use_case import RafikiFaqUseCase
+from lion_king.app.ports.output.shaman_rafiki_faq_repository import RafikiFaqRepository
 
 
 class RafikiFaqInteractor(RafikiFaqUseCase):

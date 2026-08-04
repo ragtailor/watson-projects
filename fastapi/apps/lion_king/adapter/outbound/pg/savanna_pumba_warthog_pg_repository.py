@@ -5,8 +5,8 @@ import logging
 logger = logging.getLogger(__name__)
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from tailor.apps.lion_king.app.dtos.savanna_pumba_warthog_dto import PumbaWarthogQuery, PumbaWarthogResponse
-from tailor.apps.lion_king.app.ports.output.savanna_pumba_warthog_repository import PumbaWarthogRepository
+from lion_king.app.dtos.savanna_pumba_warthog_dto import PumbaWarthogQuery, PumbaWarthogResponse
+from lion_king.app.ports.output.savanna_pumba_warthog_repository import PumbaWarthogRepository
 
 
 class PumbaWarthogPgRepository(PumbaWarthogRepository):

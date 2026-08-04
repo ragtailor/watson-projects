@@ -1,9 +1,9 @@
 from __future__ import annotations
 
-from tailor.apps.silicon_valley.adapter.inbound.api.schemas.piper_henricks_ceo_schema import HenricksCeoSchema
-from tailor.apps.silicon_valley.app.dtos.piper_henricks_ceo_dto import HenricksCeoQuery, HenricksCeoResponse
-from tailor.apps.silicon_valley.app.ports.input.piper_henricks_ceo_use_case import HenricksCeoUseCase
-from tailor.apps.silicon_valley.app.ports.output.piper_henricks_ceo_port import HenricksCeoPort
+from silicon_valley.adapter.inbound.api.schemas.piper_henricks_ceo_schema import HenricksCeoSchema
+from silicon_valley.app.dtos.piper_henricks_ceo_dto import HenricksCeoQuery, HenricksCeoResponse
+from silicon_valley.app.ports.input.piper_henricks_ceo_use_case import HenricksCeoUseCase
+from silicon_valley.app.ports.output.piper_henricks_ceo_port import HenricksCeoPort
 
 
 class HenricksCeoInteractor(HenricksCeoUseCase):

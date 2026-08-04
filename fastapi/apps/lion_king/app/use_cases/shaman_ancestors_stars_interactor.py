@@ -1,9 +1,9 @@
 from __future__ import annotations
 
-from tailor.apps.lion_king.adapter.inbound.api.schemas.shaman_ancestors_stars_schema import AncestorsStarsSchema
-from tailor.apps.lion_king.app.dtos.shaman_ancestors_stars_dto import AncestorsStarsQuery, AncestorsStarsResponse
-from tailor.apps.lion_king.app.ports.input.shaman_ancestors_stars_use_case import AncestorsStarsUseCase
-from tailor.apps.lion_king.app.ports.output.shaman_ancestors_stars_repository import AncestorsStarsRepository
+from lion_king.adapter.inbound.api.schemas.shaman_ancestors_stars_schema import AncestorsStarsSchema
+from lion_king.app.dtos.shaman_ancestors_stars_dto import AncestorsStarsQuery, AncestorsStarsResponse
+from lion_king.app.ports.input.shaman_ancestors_stars_use_case import AncestorsStarsUseCase
+from lion_king.app.ports.output.shaman_ancestors_stars_repository import AncestorsStarsRepository
 
 
 class AncestorsStarsInteractor(AncestorsStarsUseCase):
