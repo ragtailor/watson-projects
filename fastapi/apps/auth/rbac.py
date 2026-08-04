@@ -11,7 +11,14 @@ from enum import StrEnum
 
 from core.security import Role
 
-__all__ = ["Role", "Permission", "ROLE_PERMISSIONS", "permissions_for", "Provider"]
+__all__ = [
+    "Role",
+    "Permission",
+    "ROLE_PERMISSIONS",
+    "permissions_for",
+    "Provider",
+    "Platform",
+]
 
 
 class Permission(StrEnum):
@@ -44,3 +51,14 @@ class Provider(StrEnum):
     KAKAO = "kakao"
     NAVER = "naver"
     X = "x"
+
+
+class Platform(StrEnum):
+    """로그인 경로. 세션은 플랫폼별로 완전히 분리된다.
+
+    토큰의 platform 클레임, Redis 세션 슬롯, 만료 정책이 모두 이 값으로 갈린다.
+    한쪽 플랫폼의 토큰으로 다른 플랫폼의 세션을 갱신하거나 무효화할 수 없다.
+    """
+
+    MOBILE = "mobile"
+    WEB = "web"

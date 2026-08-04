@@ -13,7 +13,10 @@ _root = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, _root)                      # core.* 임포트
 sys.path.insert(0, os.path.join(_root, "apps"))  # auth.* 임포트 (repo 컨벤션: bare 앱 이름)
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Request, status
+from fastapi.encoders import jsonable_encoder
+from fastapi.exceptions import RequestValidationError
+from fastapi.responses import JSONResponse
 
 from auth.router import router as auth_router
 
@@ -22,6 +25,18 @@ app = FastAPI(
     docs_url=None, redoc_url=None, openapi_url=None,  # 실서비스: 문서 비노출
 )
 app.include_router(auth_router, prefix="/auth")
+
+
+@app.exception_handler(RequestValidationError)
+async def _validation_error(request: Request, exc: RequestValidationError) -> JSONResponse:
+    """스키마 위반을 400으로 돌려준다(FastAPI 기본은 422).
+
+    platform 누락처럼 클라이언트가 계약을 어긴 요청은 400으로 통일한다는 합의를 따른다.
+    """
+    return JSONResponse(
+        status_code=status.HTTP_400_BAD_REQUEST,
+        content={"detail": jsonable_encoder(exc.errors())},
+    )
 
 
 @app.get("/healthz")

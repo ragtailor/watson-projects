@@ -11,7 +11,7 @@ from sqlalchemy.ext.asyncio import (
 )
 
 from core.config import DATABASE_URL
-from tailor.core.matrix.grid_neo_theone_base import Base
+from core.matrix.grid_neo_theone_base import Base
 
 
 engine: AsyncEngine | None = None

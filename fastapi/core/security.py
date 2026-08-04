@@ -61,6 +61,8 @@ class TokenPayload:
     exp: int
     iat: int
     jti: str
+    # 발급 경로(mobile/web). 이 클레임이 없는 토큰은 platform 도입 이전에 발급된 것이다.
+    platform: str | None = None
 
 
 @dataclass(frozen=True)
@@ -69,6 +71,7 @@ class RefreshPayload:
     exp: int
     iat: int
     jti: str
+    platform: str | None = None
 
 
 # --------------------------------------------------------------------------- #
@@ -80,6 +83,7 @@ def create_access_token(
     roles: list[str],
     aud: str,
     expires_min: int = ACCESS_TOKEN_DEFAULT_MIN,
+    platform: str | None = None,
 ) -> str:
     private_key = config.get_jwt_private_key()
     now = int(time.time())
@@ -91,20 +95,29 @@ def create_access_token(
         "exp": now + expires_min * 60,
         "jti": secrets.token_urlsafe(16),
     }
+    # platform을 넣지 않은 토큰도 계속 유효하다(검증 정책은 auth가 정한다).
+    if platform is not None:
+        payload["platform"] = platform
     headers = {"kid": _kid_from_private_key(private_key)}
     return jwt.encode(payload, private_key, algorithm="RS256", headers=headers)
 
 
-def create_refresh_token(sub: str) -> str:
+def create_refresh_token(
+    sub: str,
+    expires_days: int = REFRESH_TOKEN_TTL_DAYS,
+    platform: str | None = None,
+) -> str:
     private_key = config.get_jwt_private_key()
     now = int(time.time())
     payload = {
         "sub": sub,
         "iat": now,
-        "exp": now + REFRESH_TOKEN_TTL_DAYS * 24 * 60 * 60,
+        "exp": now + expires_days * 24 * 60 * 60,
         "jti": secrets.token_urlsafe(16),
         "typ": "refresh",
     }
+    if platform is not None:
+        payload["platform"] = platform
     headers = {"kid": _kid_from_private_key(private_key)}
     return jwt.encode(payload, private_key, algorithm="RS256", headers=headers)
 
@@ -127,6 +140,7 @@ def verify_token(token: str, aud: str) -> TokenPayload:
             exp=int(claims["exp"]),
             iat=int(claims["iat"]),
             jti=claims["jti"],
+            platform=claims.get("platform"),
         )
     except (KeyError, TypeError, ValueError) as exc:
         raise TokenError(f"토큰 클레임이 올바르지 않습니다: {exc}") from exc
@@ -147,6 +161,7 @@ def verify_refresh_token(token: str) -> RefreshPayload:
             exp=int(claims["exp"]),
             iat=int(claims["iat"]),
             jti=claims["jti"],
+            platform=claims.get("platform"),
         )
     except (KeyError, TypeError, ValueError) as exc:
         raise TokenError(f"리프레시 토큰 클레임이 올바르지 않습니다: {exc}") from exc
