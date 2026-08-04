@@ -2,11 +2,18 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
 import 'package:video_player/video_player.dart';
 
+import 'auth.dart';
 import 'stopwatch_page.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  // 앱 키가 없으면 init이 실패하므로 건너뛴다. 이 경우 로그인 화면이 사유를 알려준다.
+  if (AuthConfig.isConfigured) {
+    await KakaoSdk.init(nativeAppKey: AuthConfig.kakaoNativeAppKey);
+  }
   runApp(const TaperApp());
 }
 
@@ -34,10 +41,13 @@ class TaperApp extends StatelessWidget {
   }
 }
 
-/// 인트로 영상을 재생하고 4초 뒤 스톱워치 화면으로 넘어간다.
+/// 인트로 영상을 재생하고 4초 뒤 다음 화면으로 넘어간다.
 ///
 /// 영상이 4초보다 길어도 4초에 전환하고, 영상 로드에 실패해도 그냥 넘어간다.
 /// 인트로 때문에 앱이 멈춰 있는 상황을 만들지 않는다.
+///
+/// 다음 화면은 모바일 세션이 살아 있는지로 갈린다. 영상이 도는 동안 저장된 리프레시
+/// 토큰으로 세션 복원을 시도하고, 성공하면 로그인 화면을 건너뛰고 스톱워치로 간다.
 class VideoIntroScreen extends StatefulWidget {
   const VideoIntroScreen({super.key});
 
@@ -49,16 +59,24 @@ class _VideoIntroScreenState extends State<VideoIntroScreen> {
   static const String _videoAsset = 'assets/video/intro.mp4';
   static const Duration _introDuration = Duration(seconds: 4);
 
+  /// 세션 복원이 늦어져도 인트로가 이 시간을 넘기지 않게 한다.
+  static const Duration _restoreTimeout = Duration(seconds: 5);
+
   final VideoPlayerController _controller =
       VideoPlayerController.asset(_videoAsset);
   Timer? _timer;
   bool _navigated = false;
 
+  /// 영상과 동시에 시작한다. 4초 뒤 이 결과로 다음 화면을 정한다.
+  late final Future<bool> _session = AuthSession.instance
+      .restore()
+      .timeout(_restoreTimeout, onTimeout: () => false);
+
   @override
   void initState() {
     super.initState();
     _playIntro();
-    _timer = Timer(_introDuration, _goToStopwatch);
+    _timer = Timer(_introDuration, _goNext);
   }
 
   @override
@@ -78,17 +96,26 @@ class _VideoIntroScreenState extends State<VideoIntroScreen> {
       setState(() {});
     } on Object {
       // 영상 파일이 없거나 코덱을 못 읽어도 인트로만 건너뛴다.
-      _goToStopwatch();
+      _goNext();
     }
   }
 
-  void _goToStopwatch() {
+  /// 세션이 살아 있으면 스톱워치로, 아니면 카카오 로그인 화면으로 간다.
+  Future<void> _goNext() async {
     if (_navigated || !mounted) {
       return;
     }
     _navigated = true;
-    Navigator.of(context).pushReplacement(
-      MaterialPageRoute<void>(builder: (_) => const StopwatchPage()),
+
+    final NavigatorState navigator = Navigator.of(context);
+    final bool signedIn = await _session;
+    if (!mounted) {
+      return;
+    }
+    navigator.pushReplacement(
+      MaterialPageRoute<void>(
+        builder: (_) => signedIn ? const StopwatchPage() : const AuthPage(),
+      ),
     );
   }
 

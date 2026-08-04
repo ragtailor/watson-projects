@@ -38,6 +38,15 @@ dependencies:
   # 인트로 영상 재생 (assets/video/intro.mp4)
   video_player: ^2.13.0
 
+  # 카카오 로그인 (OIDC id_token 획득). KakaoSdk·OAuthToken·예외 타입까지 함께 export 한다.
+  kakao_flutter_sdk_user: ^2.0.0
+
+  # 리프레시 토큰 보관 — Android Keystore / iOS Keychain. 평문 저장소를 쓰지 않는다.
+  flutter_secure_storage: ^10.3.1
+
+  # 인증 게이트웨이(auth.ragtailor.com) 호출
+  http: ^1.2.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
