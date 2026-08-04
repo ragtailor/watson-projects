@@ -3,7 +3,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from sherlock_homes.adapter.outbound.repositories.police_molly_examiner_repository import MollyExaminerRepository
 from sherlock_homes.app.ports.output.police_molly_examiner_port import MollyExaminerPort
-from tailor.core.matrix.grid_oracle_database_manager import get_db
+from core.matrix.grid_oracle_database_manager import get_db
 from sherlock_homes.app.ports.input.police_molly_examiner_use_case import MollyExaminerUseCase
 from sherlock_homes.app.use_cases.police_molly_examiner_interactor import MollyExaminerInteractor
 

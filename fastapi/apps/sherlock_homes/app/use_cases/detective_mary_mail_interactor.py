@@ -4,7 +4,7 @@ from sherlock_homes.adapter.inbound.api.schemas.detective_mary_mail_schema impor
 from sherlock_homes.app.dtos.detective_mary_mail_dto import MaryMailQuery, MaryMailResponse, MaryMailReceiveQuery, MaryMailReceiveResponse
 from sherlock_homes.app.ports.input.detective_mary_mail_use_case import MaryMailUseCase
 from sherlock_homes.app.ports.output.detective_mary_mail_port import MaryMailPort
-from tailor.core.lol.t1_mid_faker_orchestrator import FakerOrchestrator
+from core.lol.t1_mid_faker_orchestrator import FakerOrchestrator
 
 
 class MaryMailInteractor(MaryMailUseCase):

@@ -2,7 +2,9 @@ from __future__ import annotations
 
 from typing import Any
 
-from titanic.adapter.outbound.orm.passenger_rose_model_orm import RoseModelOrm
+# 이 매퍼가 다루는 값(pclass/ticket/fare/cabin/embarked)은 bookings 테이블에 있다.
+# 전용 passenger_rose_model_orm은 존재한 적이 없어, 실제 소유 ORM인 SmithCaptainOrm을 쓴다.
+from titanic.adapter.outbound.orm.crew_smith_captain_orm import SmithCaptainOrm as RoseModelOrm
 
 # RoseModelEntity is not yet defined — mapper provides ORM ↔ dict conversion
 # until the domain entity is implemented.
@@ -14,7 +16,7 @@ class RoseModelMapper:
     def to_dict(orm: RoseModelOrm) -> dict[str, Any]:
         return {
             "id": orm.id,
-            "person_id": orm.person_id,
+            "passenger_id": orm.passenger_id,
             "pclass": orm.pclass,
             "ticket": orm.ticket,
             "fare": orm.fare,
@@ -24,7 +26,7 @@ class RoseModelMapper:
 
     @staticmethod
     def to_orm(
-        person_id: int | None,
+        passenger_id: str | None,
         pclass: str | None,
         ticket: str | None,
         fare: str | None,
@@ -32,7 +34,7 @@ class RoseModelMapper:
         embarked: str | None,
     ) -> RoseModelOrm:
         return RoseModelOrm(
-            person_id=person_id,
+            passenger_id=passenger_id,
             pclass=pclass,
             ticket=ticket,
             fare=fare,

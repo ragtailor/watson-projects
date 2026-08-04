@@ -2,7 +2,7 @@ from fastapi import Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 from lion_king.adapter.outbound.pg.pride_simba_king_pg_repository import SimbaKingPgRepository
 from lion_king.app.ports.output.pride_simba_king_repository import SimbaKingRepository
-from tailor.core.matrix.grid_oracle_database_manager import get_db
+from core.matrix.grid_oracle_database_manager import get_db
 from lion_king.app.ports.input.pride_simba_king_use_case import SimbaKingUseCase
 from lion_king.app.use_cases.pride_simba_king_interactor import SimbaKingInteractor
 

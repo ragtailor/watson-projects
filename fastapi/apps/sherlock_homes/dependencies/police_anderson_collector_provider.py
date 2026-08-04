@@ -3,7 +3,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from sherlock_homes.adapter.outbound.repositories.police_anderson_collector_repository import AndersonCollectorRepository
 from sherlock_homes.app.ports.output.police_anderson_collector_port import AndersonCollectorPort
-from tailor.core.matrix.grid_oracle_database_manager import get_db
+from core.matrix.grid_oracle_database_manager import get_db
 from sherlock_homes.app.ports.input.police_anderson_collector_use_case import AndersonCollectorUseCase
 from sherlock_homes.app.use_cases.police_anderson_collector_interactor import AndersonCollectorInteractor
 

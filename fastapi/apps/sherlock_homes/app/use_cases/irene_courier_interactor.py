@@ -4,7 +4,7 @@ from sherlock_homes.adapter.inbound.api.schemas.irene_courier_schema import Iren
 from sherlock_homes.app.dtos.irene_courier_dto import IreneCourierCommand, IreneCourierResponse
 from sherlock_homes.app.ports.input.irene_courier_use_case import IreneCourierUseCase
 from sherlock_homes.app.ports.output.irene_courier_email_sender_port import IreneCourierEmailSenderPort
-from tailor.core.lol.t1_mid_faker_orchestrator import FakerOrchestrator
+from core.lol.t1_mid_faker_orchestrator import FakerOrchestrator
 
 
 class IreneCourierInteractor(IreneCourierUseCase):

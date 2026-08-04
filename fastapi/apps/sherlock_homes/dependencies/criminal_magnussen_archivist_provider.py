@@ -3,7 +3,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from sherlock_homes.adapter.outbound.repositories.criminal_magnussen_archivist_repository import MagnussenArchivistRepository
 from sherlock_homes.app.ports.output.criminal_magnussen_archivist_port import MagnussenArchivistPort
-from tailor.core.matrix.grid_oracle_database_manager import get_db
+from core.matrix.grid_oracle_database_manager import get_db
 from sherlock_homes.app.ports.input.criminal_magnussen_archivist_use_case import MagnussenArchivistUseCase
 from sherlock_homes.app.use_cases.criminal_magnussen_archivist_interactor import MagnussenArchivistInteractor
 

@@ -1,11 +1,11 @@
 ﻿from fastapi import APIRouter, Depends, Query
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from tailor.core.matrix.grid_oracle_database_manager import get_db
-from tailor.apps.titanic.adapter.inbound.api.schemas.passenger_rose_model_schema import RoseModelSchema
-from tailor.apps.titanic.app.dtos.passenger_rose_model_dto import RoseModelResponse
-from tailor.apps.titanic.app.ports.input.passenger_rose_model_use_case import RoseModelUseCase
-from tailor.apps.titanic.dependencies.passenger_rose_model_provider import get_rose_model_use_case
+from core.matrix.grid_oracle_database_manager import get_db
+from titanic.adapter.inbound.api.schemas.passenger_rose_model_schema import RoseModelSchema
+from titanic.app.dtos.passenger_rose_model_dto import RoseModelResponse
+from titanic.app.ports.input.passenger_rose_model_use_case import RoseModelUseCase
+from titanic.dependencies.passenger_rose_model_provider import get_rose_model_use_case
 
 '''
 로즈 드윗 부카터 (Rose DeWitt Bukater)

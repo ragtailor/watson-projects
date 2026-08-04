@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from sqlalchemy import ForeignKey, String
 from sqlalchemy.orm import Mapped, mapped_column
-from tailor.core.matrix.grid_neo_theone_base import Base
+from core.matrix.grid_neo_theone_base import Base
 
 
 class TeamOrm(Base):

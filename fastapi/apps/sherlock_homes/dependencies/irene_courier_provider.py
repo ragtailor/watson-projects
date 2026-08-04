@@ -1,7 +1,7 @@
 from sherlock_homes.adapter.outbound.n8n.irene_courier_n8n_email_sender import IreneCourierN8nEmailSender
 from sherlock_homes.app.ports.input.irene_courier_use_case import IreneCourierUseCase
 from sherlock_homes.app.use_cases.irene_courier_interactor import IreneCourierInteractor
-from tailor.core.lol import faker_orchestrator
+from core.lol import faker_orchestrator
 
 '''
 캐릭터: 아이린 애들러 (Irene Adler)

@@ -3,7 +3,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from sherlock_homes.adapter.outbound.repositories.police_lestrade_adapter_repository import LestradeAdapterRepository
 from sherlock_homes.app.ports.output.police_lestrade_adapter_port import LestradeAdapterPort
-from tailor.core.matrix.grid_oracle_database_manager import get_db
+from core.matrix.grid_oracle_database_manager import get_db
 from sherlock_homes.app.ports.input.police_lestrade_adapter_use_case import LestradeAdapterUseCase
 from sherlock_homes.app.use_cases.police_lestrade_adapter_interactor import LestradeAdapterInteractor
 

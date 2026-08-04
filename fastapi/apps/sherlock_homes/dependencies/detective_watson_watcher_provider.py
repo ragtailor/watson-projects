@@ -3,7 +3,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from sherlock_homes.adapter.outbound.repositories.detective_watson_watcher_repository import WatsonWatcherRepository
 from sherlock_homes.app.ports.output.detective_watson_watcher_port import WatsonWatcherPort
-from tailor.core.matrix.grid_oracle_database_manager import get_db
+from core.matrix.grid_oracle_database_manager import get_db
 from sherlock_homes.app.ports.input.detective_watson_watcher_use_case import WatsonWatcherUseCase
 from sherlock_homes.app.use_cases.detective_watson_watcher_interactor import WatsonWatcherInteractor
 

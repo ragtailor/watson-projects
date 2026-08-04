@@ -3,7 +3,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from sherlock_homes.adapter.outbound.repositories.detective_mrshudson_scheduler_repository import MrshudsonSchedulerRepository
 from sherlock_homes.app.ports.output.detective_mrshudson_scheduler_port import MrshudsonSchedulerPort
-from tailor.core.matrix.grid_oracle_database_manager import get_db
+from core.matrix.grid_oracle_database_manager import get_db
 from sherlock_homes.app.ports.input.detective_mrshudson_scheduler_use_case import MrshudsonSchedulerUseCase
 from sherlock_homes.app.use_cases.detective_mrshudson_scheduler_interactor import MrshudsonSchedulerInteractor
 

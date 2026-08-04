@@ -3,7 +3,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from sherlock_homes.adapter.outbound.repositories.police_mycroft_contact_repository import MycroftContactPgRepository
 from sherlock_homes.app.ports.output.police_mycroft_contact_port import MycroftContactPort
-from tailor.core.matrix.grid_oracle_database_manager import get_db
+from core.matrix.grid_oracle_database_manager import get_db
 from sherlock_homes.app.ports.input.police_mycroft_contact_use_case import MycroftContactUseCase
 from sherlock_homes.app.use_cases.police_mycroft_contact_interactor import MycroftContactInteractor
 
