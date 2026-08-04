@@ -1,11 +1,11 @@
 from fastapi import Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from silicon_valley.adapter.outbound.repositories.piper_gilfoyle_sys_repository import GilfoyleSysRepository
+from silicon_valley.adapter.outbound.repository.piper_gilfoyle_sys_repository import GilfoyleSysRepository
 from silicon_valley.app.ports.output.piper_gilfoyle_sys_port import GilfoyleSysPort
 from silicon_valley.app.ports.input.piper_gilfoyle_sys_use_case import GilfoyleSysUseCase
 from silicon_valley.app.use_cases.gilfoyle_sys_interactor import GilfoyleSysInteractor
-from tailor.core.matrix.grid_oracle_database_manager import get_db
+from core.matrix.grid_oracle_database_manager import get_db
 
 
 def get_gilfoyle_sys_repository(
