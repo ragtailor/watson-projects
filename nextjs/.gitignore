@@ -8,3 +8,8 @@ node_modules
 .next/
 .env.local
 .DS_Store
+
+# 빌드 캐시
+# tsc의 증분 컴파일 캐시(tsconfig.json의 "incremental": true). 빌드마다 내용이
+# 바뀌고 머신마다 달라서 추적하면 diff만 더럽힌다.
+*.tsbuildinfo
