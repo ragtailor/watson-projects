@@ -9,7 +9,7 @@ export function PortfolioGrid() {
   const bottomRight = rest.slice(4, 8);
 
   return (
-    <section id="portfolio" className="hidden bg-white py-16 dark:bg-[#0a0a0a] sm:py-20 lg:block">
+    <section id="portfolio" className="hidden bg-white py-16 dark:bg-background sm:py-20 lg:block">
       <div className="mx-auto w-full max-w-5xl px-3 sm:px-4">
         <div className="mb-8 text-center">
           <p className="text-[10px] uppercase tracking-[0.3em] text-neutral-400 dark:text-neutral-500">

@@ -122,7 +122,7 @@ export default function NoticeListPage({
     });
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-[#0a0a0a]">
+    <div className="min-h-screen bg-gray-50 dark:bg-background">
       <div className="mx-auto max-w-4xl px-4 py-8">
 
         {/* 헤더 */}
@@ -144,7 +144,7 @@ export default function NoticeListPage({
               placeholder="제목 또는 작성자 검색..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-10 dark:border-gray-700 dark:bg-[#111111] dark:text-neutral-100 dark:placeholder:text-neutral-600"
+              className="pl-10 dark:border-gray-700 dark:bg-surface dark:text-neutral-100 dark:placeholder:text-neutral-600"
             />
           </div>
           <div className="flex flex-wrap gap-2">
@@ -175,7 +175,7 @@ export default function NoticeListPage({
                 className={`transition-shadow duration-200 hover:shadow-lg ${
                   notice.isPinned
                     ? "border-amber-200 bg-amber-50 dark:border-amber-800/50 dark:bg-amber-900/10"
-                    : "border-gray-100 bg-white dark:border-gray-800 dark:bg-[#111111]"
+                    : "border-gray-100 bg-white dark:border-gray-800 dark:bg-surface"
                 }`}
               >
                 <CardContent className="p-5">
@@ -245,7 +245,7 @@ export default function NoticeListPage({
 
       {/* 새 공지 작성 다이얼로그 */}
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-        <DialogContent className="max-h-[85vh] w-[66vw] max-w-4xl overflow-y-auto dark:border-gray-700 dark:bg-[#111111]">
+        <DialogContent className="max-h-[85vh] w-[66vw] max-w-4xl overflow-y-auto dark:border-gray-700 dark:bg-surface">
           <DialogHeader>
             <DialogTitle className="text-xl font-bold dark:text-neutral-100">새 공지 작성</DialogTitle>
           </DialogHeader>
@@ -258,7 +258,7 @@ export default function NoticeListPage({
                 placeholder="공지 제목을 입력하세요"
                 value={newNotice.title}
                 onChange={(e) => setNewNotice((p) => ({ ...p, title: e.target.value }))}
-                className="w-full dark:border-gray-700 dark:bg-[#1a1a1a] dark:text-neutral-100 dark:placeholder:text-neutral-600"
+                className="w-full dark:border-gray-700 dark:bg-surface-muted dark:text-neutral-100 dark:placeholder:text-neutral-600"
               />
             </div>
 
@@ -268,10 +268,10 @@ export default function NoticeListPage({
                 value={newNotice.category}
                 onValueChange={(v) => setNewNotice((p) => ({ ...p, category: v }))}
               >
-                <SelectTrigger className="w-full max-w-xs dark:border-gray-700 dark:bg-[#1a1a1a] dark:text-neutral-100">
+                <SelectTrigger className="w-full max-w-xs dark:border-gray-700 dark:bg-surface-muted dark:text-neutral-100">
                   <SelectValue placeholder="카테고리 선택" />
                 </SelectTrigger>
-                <SelectContent className="dark:border-gray-700 dark:bg-[#1a1a1a]">
+                <SelectContent className="dark:border-gray-700 dark:bg-surface-muted">
                   <SelectItem value="공지">공지</SelectItem>
                   <SelectItem value="업무">업무</SelectItem>
                   <SelectItem value="기타">기타</SelectItem>
@@ -286,7 +286,7 @@ export default function NoticeListPage({
                 placeholder="공지 내용을 입력하세요"
                 value={newNotice.content}
                 onChange={(e) => setNewNotice((p) => ({ ...p, content: e.target.value }))}
-                className="min-h-[200px] w-full resize-none dark:border-gray-700 dark:bg-[#1a1a1a] dark:text-neutral-100 dark:placeholder:text-neutral-600"
+                className="min-h-[200px] w-full resize-none dark:border-gray-700 dark:bg-surface-muted dark:text-neutral-100 dark:placeholder:text-neutral-600"
               />
             </div>
 

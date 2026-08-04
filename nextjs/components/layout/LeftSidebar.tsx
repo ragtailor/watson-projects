@@ -165,7 +165,7 @@ export function LeftSidebar() {
   if (!isLesson) return null;
 
   return (
-    <aside className="hidden h-full w-52 shrink-0 overflow-y-auto border-r border-neutral-100 bg-neutral-50 px-4 py-6 dark:border-gray-800 dark:bg-[#111111] md:block">
+    <aside className="hidden h-full w-52 shrink-0 overflow-y-auto border-r border-neutral-100 bg-neutral-50 px-4 py-6 dark:border-gray-800 dark:bg-surface md:block">
       <LessonSectionNav />
     </aside>
   );

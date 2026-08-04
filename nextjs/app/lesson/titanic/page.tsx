@@ -119,7 +119,7 @@ function CaptainSmithChat() {
             <div className={`max-w-[75%] rounded px-3 py-2 text-sm leading-relaxed ${
               msg.role === "user"
                 ? "bg-neutral-900 text-white dark:bg-neutral-700 dark:text-neutral-100"
-                : "bg-neutral-100 text-neutral-800 dark:bg-[#1a1a1a] dark:text-neutral-200"
+                : "bg-neutral-100 text-neutral-800 dark:bg-surface-muted dark:text-neutral-200"
             }`}>
               {msg.text}
             </div>
@@ -128,7 +128,7 @@ function CaptainSmithChat() {
         {loading && (
           <div className="flex gap-3">
             <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-neutral-800 text-base dark:bg-neutral-700">🎩</div>
-            <div className="flex items-center gap-1 rounded bg-neutral-100 px-3 py-2 dark:bg-[#1a1a1a]">
+            <div className="flex items-center gap-1 rounded bg-neutral-100 px-3 py-2 dark:bg-surface-muted">
               {[0, 150, 300].map((d) => (
                 <span key={d} className="h-1.5 w-1.5 animate-bounce rounded-full bg-neutral-400 dark:bg-neutral-600" style={{ animationDelay: `${d}ms` }} />
               ))}
@@ -152,7 +152,7 @@ function CaptainSmithChat() {
             onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send(); } }}
             placeholder="선장님께 질문하세요… (Enter 전송)"
             rows={2}
-            className="flex-1 resize-none rounded border border-neutral-200 bg-white px-3 py-2 text-sm placeholder:text-neutral-400 focus:border-neutral-400 focus:outline-none dark:border-gray-700 dark:bg-[#1a1a1a] dark:text-neutral-100 dark:placeholder:text-neutral-600 dark:focus:border-gray-500"
+            className="flex-1 resize-none rounded border border-neutral-200 bg-white px-3 py-2 text-sm placeholder:text-neutral-400 focus:border-neutral-400 focus:outline-none dark:border-gray-700 dark:bg-surface-muted dark:text-neutral-100 dark:placeholder:text-neutral-600 dark:focus:border-gray-500"
           />
           <button
             type="button"

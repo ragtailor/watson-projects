@@ -17,9 +17,9 @@ export function HomeHero() {
   return (
     <>
       {/* Mobile */}
-      <section className="bg-white dark:bg-[#0a0a0a] lg:hidden">
+      <section className="bg-white dark:bg-background lg:hidden">
         <div className="mx-auto w-full max-w-md px-4 pb-12">
-          <div className="mx-auto aspect-square w-full max-w-sm border border-neutral-200 bg-neutral-50 dark:border-gray-700 dark:bg-[#111111]">
+          <div className="mx-auto aspect-square w-full max-w-sm border border-neutral-200 bg-neutral-50 dark:border-gray-700 dark:bg-surface">
             <div className="flex h-full flex-col items-center justify-center gap-4 p-6 text-center">
               <Image
                 src="/partners/ibm-redhat.png"
@@ -46,7 +46,7 @@ export function HomeHero() {
       </section>
 
       {/* Desktop */}
-      <section className="relative hidden min-h-[calc(100vh-4rem)] items-center justify-center bg-white dark:bg-[#0a0a0a] lg:flex">
+      <section className="relative hidden min-h-[calc(100vh-4rem)] items-center justify-center bg-white dark:bg-background lg:flex">
         <div className="mx-auto w-full max-w-lg px-4 py-16 text-center sm:max-w-xl sm:py-20 md:max-w-2xl">
           <div className="mb-8">
             <p className="mb-3 text-sm text-slate-600 dark:text-slate-400">
@@ -85,7 +85,7 @@ export function HomeHero() {
             {curriculumTags.map((tech) => (
               <span
                 key={tech}
-                className="rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-600 shadow-sm dark:border-gray-700 dark:bg-[#111111] dark:text-slate-400"
+                className="rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-600 shadow-sm dark:border-gray-700 dark:bg-surface dark:text-slate-400"
               >
                 {tech}
               </span>

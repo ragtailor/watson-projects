@@ -91,18 +91,18 @@ export default function MailPage() {
               value={query}
               onChange={(e) => { setQuery(e.target.value); setTo(""); }}
               placeholder="이름 입력 (주소록 자동완성)"
-              className="w-full rounded border border-neutral-200 bg-white px-3 py-2.5 text-sm text-neutral-900 placeholder-neutral-400 focus:outline-none dark:border-gray-700 dark:bg-[#1a1a1a] dark:text-neutral-100 dark:placeholder-neutral-600"
+              className="w-full rounded border border-neutral-200 bg-white px-3 py-2.5 text-sm text-neutral-900 placeholder-neutral-400 focus:outline-none dark:border-gray-700 dark:bg-surface-muted dark:text-neutral-100 dark:placeholder-neutral-600"
             />
 
             {/* 드롭다운 */}
             {open && (
-              <ul className="absolute left-0 right-0 top-full z-50 mt-1 overflow-hidden rounded border border-neutral-200 bg-white shadow-lg dark:border-gray-700 dark:bg-[#1a1a1a]">
+              <ul className="absolute left-0 right-0 top-full z-50 mt-1 overflow-hidden rounded border border-neutral-200 bg-white shadow-lg dark:border-gray-700 dark:bg-surface-muted">
                 {hits.map((hit) => (
                   <li key={hit.id}>
                     <button
                       type="button"
                       onMouseDown={(e) => { e.preventDefault(); selectContact(hit); }}
-                      className="flex w-full items-center justify-between px-3 py-2.5 text-left text-sm hover:bg-neutral-50 dark:hover:bg-[#222]"
+                      className="flex w-full items-center justify-between px-3 py-2.5 text-left text-sm hover:bg-neutral-50 dark:hover:bg-surface-hover"
                     >
                       <span className="text-neutral-900 dark:text-neutral-100">{hit.name}</span>
                       <span className="ml-4 shrink-0 text-xs text-neutral-400 dark:text-neutral-500">
@@ -133,7 +133,7 @@ export default function MailPage() {
             onChange={(e) => setMessage(e.target.value)}
             placeholder="전달할 내용을 입력하세요"
             rows={10}
-            className="resize-none rounded border border-neutral-200 bg-white px-3 py-2.5 text-sm text-neutral-900 placeholder-neutral-400 focus:outline-none dark:border-gray-700 dark:bg-[#1a1a1a] dark:text-neutral-100 dark:placeholder-neutral-600"
+            className="resize-none rounded border border-neutral-200 bg-white px-3 py-2.5 text-sm text-neutral-900 placeholder-neutral-400 focus:outline-none dark:border-gray-700 dark:bg-surface-muted dark:text-neutral-100 dark:placeholder-neutral-600"
           />
         </div>
 

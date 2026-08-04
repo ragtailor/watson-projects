@@ -22,7 +22,7 @@ type AuthPanelProps = {
 };
 
 const inputCls =
-  "h-11 rounded-xl border-slate-200 bg-slate-50/50 dark:border-gray-700 dark:bg-[#1a1a1a] dark:text-neutral-100 dark:placeholder:text-neutral-600";
+  "h-11 rounded-xl border-slate-200 bg-slate-50/50 dark:border-gray-700 dark:bg-surface-muted dark:text-neutral-100 dark:placeholder:text-neutral-600";
 
 export function AuthPanel({
   defaultTab = "login",
@@ -81,16 +81,16 @@ export function AuthPanel({
         onValueChange={(v) => setTab(v as AuthTab)}
         className="gap-6"
       >
-        <TabsList className="grid h-11 w-full grid-cols-2 rounded-full bg-slate-100 p-1 dark:bg-[#1a1a1a]">
+        <TabsList className="grid h-11 w-full grid-cols-2 rounded-full bg-slate-100 p-1 dark:bg-surface-muted">
           <TabsTrigger
             value="login"
-            className="rounded-full data-[state=active]:bg-white data-[state=active]:text-sky-700 data-[state=active]:shadow-sm dark:text-neutral-400 dark:data-[state=active]:bg-[#111111] dark:data-[state=active]:text-sky-400"
+            className="rounded-full data-[state=active]:bg-white data-[state=active]:text-sky-700 data-[state=active]:shadow-sm dark:text-neutral-400 dark:data-[state=active]:bg-surface dark:data-[state=active]:text-sky-400"
           >
             로그인
           </TabsTrigger>
           <TabsTrigger
             value="signup"
-            className="rounded-full data-[state=active]:bg-white data-[state=active]:text-sky-700 data-[state=active]:shadow-sm dark:text-neutral-400 dark:data-[state=active]:bg-[#111111] dark:data-[state=active]:text-sky-400"
+            className="rounded-full data-[state=active]:bg-white data-[state=active]:text-sky-700 data-[state=active]:shadow-sm dark:text-neutral-400 dark:data-[state=active]:bg-surface dark:data-[state=active]:text-sky-400"
           >
             회원가입
           </TabsTrigger>

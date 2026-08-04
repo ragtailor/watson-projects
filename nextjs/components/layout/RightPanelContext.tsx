@@ -47,7 +47,7 @@ export function RightPanel() {
   const { content } = useRightPanel();
   if (!content) return null;
   return (
-    <aside className="hidden h-full w-[200px] shrink-0 overflow-y-auto border-l border-neutral-100 bg-neutral-50 p-4 dark:border-gray-800 dark:bg-[#111111] lg:block">
+    <aside className="hidden h-full w-[200px] shrink-0 overflow-y-auto border-l border-neutral-100 bg-neutral-50 p-4 dark:border-gray-800 dark:bg-surface lg:block">
       {content}
     </aside>
   );

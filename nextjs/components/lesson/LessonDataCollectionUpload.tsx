@@ -71,8 +71,8 @@ export function LessonDataCollectionUpload() {
         className={[
           "flex min-h-[220px] flex-col items-center justify-center gap-3 rounded-lg border-2 border-dashed px-6 py-10 transition-colors",
           isDragging
-            ? "border-neutral-900 bg-neutral-50 dark:border-neutral-100 dark:bg-[#1a1a1a]"
-            : "border-neutral-200 bg-neutral-50/50 dark:border-gray-700 dark:bg-[#111111]/50",
+            ? "border-neutral-900 bg-neutral-50 dark:border-neutral-100 dark:bg-surface-muted"
+            : "border-neutral-200 bg-neutral-50/50 dark:border-gray-700 dark:bg-surface/50",
         ].join(" ")}
       >
         <FileSpreadsheet className="h-11 w-11 text-neutral-400 dark:text-neutral-500" strokeWidth={1.25} aria-hidden />
@@ -90,7 +90,7 @@ export function LessonDataCollectionUpload() {
           <div className="w-full border-t border-neutral-200 dark:border-gray-700" />
         </div>
         <div className="relative flex justify-center text-[10px] uppercase tracking-[0.2em]">
-          <span className="bg-white px-3 text-neutral-400 dark:bg-[#0a0a0a] dark:text-neutral-500">또는</span>
+          <span className="bg-white px-3 text-neutral-400 dark:bg-background dark:text-neutral-500">또는</span>
         </div>
       </div>
 
@@ -116,7 +116,7 @@ export function LessonDataCollectionUpload() {
           role="status"
           className={
             message.type === "ok"
-              ? "rounded-sm bg-neutral-100 px-4 py-3 text-sm text-neutral-800 dark:bg-[#1a1a1a] dark:text-neutral-200"
+              ? "rounded-sm bg-neutral-100 px-4 py-3 text-sm text-neutral-800 dark:bg-surface-muted dark:text-neutral-200"
               : "rounded-sm bg-red-50 px-4 py-3 text-sm text-red-800 dark:bg-red-950/30 dark:text-red-400"
           }
         >

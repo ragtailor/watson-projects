@@ -42,7 +42,7 @@ const providers: Provider[] = [
   {
     id: "naver",
     label: "네이버로 로그인",
-    className: "bg-[#03C75A]",
+    className: "bg-brand-naver",
     icon: (
       <svg viewBox="0 0 24 24" className="h-5 w-5 fill-white">
         <path d="M16.273 12.845 7.376 0H0v24h7.727V11.155L16.624 24H24V0h-7.727z" />
@@ -52,9 +52,9 @@ const providers: Provider[] = [
   {
     id: "kakao",
     label: "카카오로 로그인",
-    className: "bg-[#FEE500]",
+    className: "bg-brand-kakao",
     icon: (
-      <svg viewBox="0 0 24 24" className="h-5 w-5 fill-[#391B1B]">
+      <svg viewBox="0 0 24 24" className="h-5 w-5 fill-brand-kakao-foreground">
         <path d="M12 3C6.477 3 2 6.633 2 11.032c0 2.822 1.822 5.302 4.573 6.729-.2.75-.725 2.719-.83 3.145-.13.529.194.523.407.38.167-.112 2.653-1.804 3.73-2.535.68.099 1.38.15 2.12.15 5.523 0 10-3.633 10-8.03C22 6.632 17.523 3 12 3z" />
       </svg>
     ),

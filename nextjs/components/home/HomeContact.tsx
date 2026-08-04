@@ -1,6 +1,6 @@
 export function HomeContact() {
   return (
-    <section className="hidden border-t border-neutral-100 bg-white py-20 dark:border-gray-800 dark:bg-[#0a0a0a] sm:py-24 lg:block">
+    <section className="hidden border-t border-neutral-100 bg-white py-20 dark:border-gray-800 dark:bg-background sm:py-24 lg:block">
       <div className="mx-auto w-full max-w-lg px-4 text-center sm:max-w-xl sm:px-6">
         <p className="text-[10px] uppercase tracking-[0.3em] text-neutral-400 dark:text-neutral-500">
           Contact

@@ -27,9 +27,9 @@ export function CrawlingNewsBoard() {
         {dummyNews.map((news) => (
           <article
             key={news.id}
-            className="flex flex-col rounded-lg border border-neutral-200 bg-white dark:border-gray-700 dark:bg-[#111111]"
+            className="flex flex-col rounded-lg border border-neutral-200 bg-white dark:border-gray-700 dark:bg-surface"
           >
-            <div className="flex h-32 items-center justify-center rounded-t-lg bg-neutral-100 text-neutral-300 dark:bg-[#1a1a1a] dark:text-neutral-600">
+            <div className="flex h-32 items-center justify-center rounded-t-lg bg-neutral-100 text-neutral-300 dark:bg-surface-muted dark:text-neutral-600">
               <Newspaper className="h-10 w-10" strokeWidth={1.25} aria-hidden />
             </div>
             <div className="flex flex-1 flex-col gap-2 p-4">

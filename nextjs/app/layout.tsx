@@ -29,7 +29,7 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="ko" suppressHydrationWarning>
-      <body className="bg-white font-sans antialiased dark:bg-[#0a0a0a]">
+      <body className="bg-white font-sans antialiased dark:bg-background">
         <ThemeProvider
           attribute="class"
           defaultTheme="light"

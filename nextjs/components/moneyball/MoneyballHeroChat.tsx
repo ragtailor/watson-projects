@@ -179,7 +179,7 @@ export function MoneyballHeroChat({ className }: MoneyballHeroChatProps) {
       {messages.length > 0 && (
         <div
           ref={listRef}
-          className="mb-4 max-h-[min(40vh,320px)] space-y-3 overflow-y-auto rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-[#111111]"
+          className="mb-4 max-h-[min(40vh,320px)] space-y-3 overflow-y-auto rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-surface"
         >
           {messages.map((m) => (
             <div
@@ -187,14 +187,14 @@ export function MoneyballHeroChat({ className }: MoneyballHeroChatProps) {
               className={
                 m.role === "user"
                   ? "ml-8 rounded-2xl rounded-tr-sm bg-emerald-100 px-4 py-2.5 text-sm text-slate-800 dark:bg-emerald-900/40 dark:text-emerald-100"
-                  : "mr-8 whitespace-pre-wrap rounded-2xl rounded-tl-sm border border-slate-200 bg-slate-50 px-4 py-2.5 text-sm text-slate-800 dark:border-gray-700 dark:bg-[#1a1a1a] dark:text-slate-200"
+                  : "mr-8 whitespace-pre-wrap rounded-2xl rounded-tl-sm border border-slate-200 bg-slate-50 px-4 py-2.5 text-sm text-slate-800 dark:border-gray-700 dark:bg-surface-muted dark:text-slate-200"
               }
             >
               {m.text}
             </div>
           ))}
           {loading && (
-            <div className="mr-8 rounded-2xl rounded-tl-sm border border-slate-200 bg-slate-50 px-4 py-2.5 text-sm text-slate-500 dark:border-gray-700 dark:bg-[#1a1a1a] dark:text-slate-400">
+            <div className="mr-8 rounded-2xl rounded-tl-sm border border-slate-200 bg-slate-50 px-4 py-2.5 text-sm text-slate-500 dark:border-gray-700 dark:bg-surface-muted dark:text-slate-400">
               축구 마스터가 분석 중입니다…
             </div>
           )}
@@ -202,7 +202,7 @@ export function MoneyballHeroChat({ className }: MoneyballHeroChatProps) {
       )}
 
       {/* 입력창 */}
-      <div className="rounded-[1.75rem] border border-slate-200 bg-white p-4 shadow-md shadow-slate-200/60 ring-1 ring-slate-100 dark:border-gray-700 dark:bg-[#111111] dark:shadow-none dark:ring-gray-800">
+      <div className="rounded-[1.75rem] border border-slate-200 bg-white p-4 shadow-md shadow-slate-200/60 ring-1 ring-slate-100 dark:border-gray-700 dark:bg-surface dark:shadow-none dark:ring-gray-800">
         <textarea
           ref={textareaRef}
           rows={1}
@@ -248,7 +248,7 @@ export function MoneyballHeroChat({ className }: MoneyballHeroChatProps) {
                   setModelKey(e.target.value as (typeof MODEL_OPTIONS)[number]["key"])
                 }
                 disabled={loading}
-                className="h-10 appearance-none rounded-full border border-slate-200 bg-slate-50 py-0 pr-9 pl-3 text-sm text-slate-800 outline-none hover:border-slate-300 focus:border-emerald-400 focus:ring-1 focus:ring-emerald-200 disabled:opacity-50 dark:border-gray-700 dark:bg-[#1a1a1a] dark:text-slate-200 dark:hover:border-gray-600 dark:focus:border-emerald-500 dark:focus:ring-emerald-900"
+                className="h-10 appearance-none rounded-full border border-slate-200 bg-slate-50 py-0 pr-9 pl-3 text-sm text-slate-800 outline-none hover:border-slate-300 focus:border-emerald-400 focus:ring-1 focus:ring-emerald-200 disabled:opacity-50 dark:border-gray-700 dark:bg-surface-muted dark:text-slate-200 dark:hover:border-gray-600 dark:focus:border-emerald-500 dark:focus:ring-emerald-900"
               >
                 {MODEL_OPTIONS.map((o) => (
                   <option key={o.key} value={o.key}>

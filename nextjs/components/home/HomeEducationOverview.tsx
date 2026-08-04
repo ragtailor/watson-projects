@@ -45,7 +45,7 @@ export function HomeEducationOverview() {
   return (
     <section
       id="services"
-      className="hidden border-t border-neutral-100 bg-white py-16 dark:border-gray-800 dark:bg-[#0a0a0a] sm:py-24 lg:block"
+      className="hidden border-t border-neutral-100 bg-white py-16 dark:border-gray-800 dark:bg-background sm:py-24 lg:block"
     >
       <div className="mx-auto w-full max-w-lg px-4 text-center sm:max-w-xl md:max-w-2xl lg:max-w-4xl">
         <h2 className="text-2xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100 sm:text-3xl">

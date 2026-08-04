@@ -166,7 +166,7 @@ export default async function AlgorithmPage({ params }: Props) {
       </div>
 
       {/* 복잡도 */}
-      <div className="mb-10 flex gap-6 rounded border border-neutral-100 bg-neutral-50 px-5 py-4 text-sm dark:border-gray-800 dark:bg-[#111111]">
+      <div className="mb-10 flex gap-6 rounded border border-neutral-100 bg-neutral-50 px-5 py-4 text-sm dark:border-gray-800 dark:bg-surface">
         <div>
           <p className="mb-0.5 text-[10px] uppercase tracking-[0.15em] text-neutral-400 dark:text-neutral-500">시간 복잡도</p>
           <p className="font-mono font-medium text-neutral-900 dark:text-neutral-100">{algo.complexity.time}</p>
@@ -191,7 +191,7 @@ export default async function AlgorithmPage({ params }: Props) {
       </div>
 
       {/* 준비 중 안내 */}
-      <div className="rounded border border-neutral-100 bg-neutral-50 px-5 py-6 text-center text-sm text-neutral-500 dark:border-gray-800 dark:bg-[#111111] dark:text-neutral-500">
+      <div className="rounded border border-neutral-100 bg-neutral-50 px-5 py-6 text-center text-sm text-neutral-500 dark:border-gray-800 dark:bg-surface dark:text-neutral-500">
         실습 코드 및 문제풀이 콘텐츠 준비 중입니다.
       </div>
 

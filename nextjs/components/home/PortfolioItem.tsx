@@ -17,7 +17,7 @@ export function PortfolioItem({
     <article className={cn("group flex flex-col", className)}>
       <div
         className={cn(
-          "relative flex items-center justify-center border border-neutral-200 bg-neutral-50 transition-colors group-hover:border-neutral-400 dark:border-gray-800 dark:bg-[#111111] dark:group-hover:border-gray-500",
+          "relative flex items-center justify-center border border-neutral-200 bg-neutral-50 transition-colors group-hover:border-neutral-400 dark:border-gray-800 dark:bg-surface dark:group-hover:border-gray-500",
           featured ? "aspect-[3/4] min-h-[320px]" : "aspect-square",
         )}
       >

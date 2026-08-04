@@ -119,15 +119,15 @@ export default function CrawlingBoardWritePage() {
       <form onSubmit={handleSubmit} className="mt-8 max-w-xl space-y-5">
         <div className="space-y-2">
           <Label htmlFor="title" className="dark:text-neutral-300">제목</Label>
-          <Input id="title" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="제목을 입력하세요" className="rounded-none dark:border-gray-700 dark:bg-[#111111] dark:text-neutral-100 dark:placeholder:text-neutral-600" />
+          <Input id="title" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="제목을 입력하세요" className="rounded-none dark:border-gray-700 dark:bg-surface dark:text-neutral-100 dark:placeholder:text-neutral-600" />
         </div>
         <div className="space-y-2">
           <Label htmlFor="author" className="dark:text-neutral-300">작성자</Label>
-          <Input id="author" value={author} onChange={(e) => setAuthor(e.target.value)} placeholder="이름을 입력하세요 (선택)" className="rounded-none dark:border-gray-700 dark:bg-[#111111] dark:text-neutral-100 dark:placeholder:text-neutral-600" />
+          <Input id="author" value={author} onChange={(e) => setAuthor(e.target.value)} placeholder="이름을 입력하세요 (선택)" className="rounded-none dark:border-gray-700 dark:bg-surface dark:text-neutral-100 dark:placeholder:text-neutral-600" />
         </div>
         <div className="space-y-2">
           <Label htmlFor="content" className="dark:text-neutral-300">내용</Label>
-          <Textarea id="content" value={content} onChange={(e) => setContent(e.target.value)} rows={8} placeholder="내용을 입력하세요" className="rounded-none dark:border-gray-700 dark:bg-[#111111] dark:text-neutral-100 dark:placeholder:text-neutral-600" />
+          <Textarea id="content" value={content} onChange={(e) => setContent(e.target.value)} rows={8} placeholder="내용을 입력하세요" className="rounded-none dark:border-gray-700 dark:bg-surface dark:text-neutral-100 dark:placeholder:text-neutral-600" />
         </div>
 
         <div className="space-y-2">
@@ -139,7 +139,7 @@ export default function CrawlingBoardWritePage() {
             onDrop={handleDrop}
             className={`flex cursor-pointer flex-col items-center justify-center gap-2 border border-dashed px-4 py-8 text-sm transition-colors ${
               isDragging
-                ? "border-neutral-900 bg-neutral-50 dark:border-neutral-100 dark:bg-[#1a1a1a]"
+                ? "border-neutral-900 bg-neutral-50 dark:border-neutral-100 dark:bg-surface-muted"
                 : "border-neutral-300 text-neutral-400 hover:border-neutral-500 hover:text-neutral-600 dark:border-gray-700 dark:text-neutral-500 dark:hover:border-gray-500 dark:hover:text-neutral-400"
             }`}
           >

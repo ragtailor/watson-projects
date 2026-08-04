@@ -67,7 +67,7 @@ export function ContactsUpload({ onClose, onSuccess }: Props) {
         role="dialog"
         aria-modal="true"
         aria-label="주소록 CSV 업로드"
-        className="fixed left-1/2 top-1/2 z-50 w-[min(92vw,520px)] -translate-x-1/2 -translate-y-1/2 rounded-lg bg-white shadow-2xl dark:bg-[#111111]"
+        className="fixed left-1/2 top-1/2 z-50 w-[min(92vw,520px)] -translate-x-1/2 -translate-y-1/2 rounded-lg bg-white shadow-2xl dark:bg-surface"
       >
         {/* 헤더 */}
         <div className="flex h-12 items-center justify-between border-b border-neutral-100 px-5 dark:border-gray-800">
@@ -105,8 +105,8 @@ export function ContactsUpload({ onClose, onSuccess }: Props) {
             className={[
               "flex min-h-[180px] flex-col items-center justify-center gap-3 rounded-lg border-2 border-dashed px-6 py-8 transition-colors",
               isDragging
-                ? "border-neutral-900 bg-neutral-50 dark:border-neutral-100 dark:bg-[#1a1a1a]"
-                : "border-neutral-200 bg-neutral-50/50 dark:border-gray-700 dark:bg-[#111111]/50",
+                ? "border-neutral-900 bg-neutral-50 dark:border-neutral-100 dark:bg-surface-muted"
+                : "border-neutral-200 bg-neutral-50/50 dark:border-gray-700 dark:bg-surface/50",
             ].join(" ")}
           >
             <FileSpreadsheet className="h-10 w-10 text-neutral-400 dark:text-neutral-500" strokeWidth={1.25} aria-hidden />
@@ -124,7 +124,7 @@ export function ContactsUpload({ onClose, onSuccess }: Props) {
               <div className="w-full border-t border-neutral-200 dark:border-gray-700" />
             </div>
             <div className="relative flex justify-center text-[10px] uppercase tracking-[0.2em]">
-              <span className="bg-white px-3 text-neutral-400 dark:bg-[#111111] dark:text-neutral-500">또는</span>
+              <span className="bg-white px-3 text-neutral-400 dark:bg-surface dark:text-neutral-500">또는</span>
             </div>
           </div>
 
@@ -147,7 +147,7 @@ export function ContactsUpload({ onClose, onSuccess }: Props) {
               role="status"
               className={
                 message.type === "ok"
-                  ? "rounded-sm bg-neutral-100 px-4 py-3 text-sm text-neutral-800 dark:bg-[#1a1a1a] dark:text-neutral-200"
+                  ? "rounded-sm bg-neutral-100 px-4 py-3 text-sm text-neutral-800 dark:bg-surface-muted dark:text-neutral-200"
                   : "rounded-sm bg-red-50 px-4 py-3 text-sm text-red-800 dark:bg-red-950/30 dark:text-red-400"
               }
             >

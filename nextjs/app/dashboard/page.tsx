@@ -62,7 +62,7 @@ const shortcuts = [
 
 export default function DashboardPage() {
   return (
-    <div className="fixed inset-0 z-40 flex flex-col bg-white text-neutral-900 dark:bg-[#0a0a0a] dark:text-neutral-100">
+    <div className="fixed inset-0 z-40 flex flex-col bg-white text-neutral-900 dark:bg-background dark:text-neutral-100">
       {/* 대시보드 전용 상단바 */}
       <header className="flex h-12 shrink-0 items-center justify-between border-b border-neutral-100 px-4 dark:border-gray-800">
         <span className="flex items-center gap-2 text-sm font-medium">
