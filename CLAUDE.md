@@ -122,25 +122,26 @@ docker compose -f fastapi/docker-compose.yml logs -f api
 ## 환경 변수
 
 `.env`류는 전부 커밋 금지다 (`.gitignore`가 `.env*`, `*.pem`, `*.key`를 차단하며
-`.env.example`만 예외). 예시는 **`fastapi/.env.example` 하나로 통합**되어 있으며, 파일 안의
-`[.env]` / `[.env.backend]` / `[.env.auth]` 섹션 표시를 보고 해당 파일로 나눠 담는다.
-`docker-compose.yml`의 `env_file` 배선은 여전히 세 파일로 분리되어 있다.
+`.env.example`만 예외).
 
-**env 파일 3개는 모두 `fastapi/` 아래에 모아 둔다.** 저장소 루트에는 두지 않는다
-(`docker-compose.yml`의 `env_file` 경로가 기준).
+**백엔드 env 파일은 `fastapi/.env` 하나다.** `api`와 `auth` 두 서비스가 같은 파일을 읽으며,
+예전의 `.env.backend` / `.env.auth` 분리는 폐지했다. `fastapi/.env.example`을 그대로 복사해 쓴다.
 
 | 파일 | 예시 출처 | 주요 값 |
 |------|-----------|---------|
-| `fastapi/.env` | `fastapi/.env.example`의 `[.env]` 섹션 | `DATABASE_URL`, `REDIS_URL`, `CORS_ORIGINS`, `GEMINI_API_KEY`, `NEO4J_*`, `POSTGRES_*`, `AUTH_ID`/`AUTH_PW`/`SESSION_SECRET`, kingsman OAuth 클라이언트 |
-| `fastapi/.env.backend` | `fastapi/.env.example`의 `[.env.backend]` 섹션 | `JWT_PUBLIC_KEY`, `SERVICE_AUD` |
-| `fastapi/.env.auth` | `fastapi/.env.example`의 `[.env.auth]` 섹션 | `JWT_PRIVATE_KEY`, `JWT_PUBLIC_KEY`, `SERVICE_AUD`, `REDIS_URL` |
+| `fastapi/.env` | `fastapi/.env.example` (전체) | `DATABASE_URL`, `REDIS_URL`, `CORS_ORIGINS`, `GEMINI_API_KEY`, `NEO4J_*`, `POSTGRES_*`, `OLLAMA_*`, `AUTH_ID`/`AUTH_PW`/`SESSION_SECRET`, kingsman OAuth 클라이언트, `JWT_PRIVATE_KEY`/`JWT_PUBLIC_KEY`/`SERVICE_AUD` |
 | `nextjs/.env.local` | — | `GEMINI_API_KEY`, `NEXT_PUBLIC_API_URL` |
 
-**키 분리 원칙:** RS256 개인키(`JWT_PRIVATE_KEY`)는 `auth` 컨테이너에만 존재한다.
-백엔드는 공개키로 검증만 하므로 `fastapi/.env.backend`에 개인키를 넣지 않는다.
-예시가 한 파일로 합쳐졌으므로, `fastapi/.env.example`을 통째로 `fastapi/.env`로 복사하면
-이 원칙이 깨진다 — `[.env.auth]` 섹션은 반드시 `fastapi/.env.auth`로만 옮긴다.
-세 파일이 같은 디렉터리에 모여 있으니 파일명을 혼동하지 않도록 주의한다.
+**키 분리는 이제 파일 경계가 아니라 코드 경계로만 유지된다.** 한 파일을 공유하므로
+`JWT_PRIVATE_KEY`가 `api` 컨테이너에도 로드된다. 실제 분리는 다음 두 가지로만 지켜진다.
+
+- 토큰 발급(개인키 사용)은 `auth_main.py` 경로에서만 한다.
+- `main.py`(api)는 공개키로 검증만 하며 `JWT_PRIVATE_KEY`를 읽지 않는다.
+
+이 경계를 깨는 코드(api 쪽에서 개인키를 읽거나 토큰을 발급하는 코드)를 추가하지 않는다.
+파일 분리가 강제하던 안전장치가 없어졌으므로 코드 리뷰에서 확인해야 한다.
+
+또한 같은 키를 파일 안에 두 번 정의하지 않는다 — 마지막 값이 조용히 이겨서 추적하기 어렵다.
 
 `auth` 쪽 `SERVICE_AUD`와 백엔드 `SERVICE_AUD`가 일치해야 토큰 검증이 통과한다.
 OAuth `redirect_uri`는 `{OAUTH_REDIRECT_BASE_URL}/api/kingsman/oauth/{provider}/callback`

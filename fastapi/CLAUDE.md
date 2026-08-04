@@ -16,14 +16,13 @@ uvicorn main:app --reload --host 127.0.0.1 --port 8000
 
 ## 환경 변수
 
-환경 변수 파일은 **전부 `fastapi/` 아래**에 있다 (저장소 루트가 아니다).
-`fastapi/.env.example` 하나가 세 파일의 예시를 겸하며, 섹션 표시대로 나눠 담는다.
+환경 변수는 **`fastapi/.env` 하나**에서 읽는다 (저장소 루트가 아니다).
+`api`와 `auth` 두 서비스가 같은 파일을 공유하며, `fastapi/.env.example`을 그대로 복사해 만든다.
 
-| 파일 | 읽는 서비스 |
-|------|-------------|
-| `fastapi/.env` | `api` (공용 설정) |
-| `fastapi/.env.backend` | `api` (`JWT_PUBLIC_KEY` 검증 전용) |
-| `fastapi/.env.auth` | `auth` (`JWT_PRIVATE_KEY` — 개인키는 여기에만) |
+`JWT_PRIVATE_KEY`도 이 파일에 있어 `api` 컨테이너에 로드된다. 개인키를 실제로 쓰는 곳은
+`auth_main.py`뿐이며 `main.py`는 공개키로 검증만 한다 — 이 코드 경계를 깨지 않는다.
+
+같은 키를 파일 안에 두 번 정의하지 않는다. 마지막 값이 조용히 이긴다.
 
 `docker-compose.yml`도 이 디렉터리에 있어 `.env`가 자동 로드된다 (`--env-file` 불필요).
 
