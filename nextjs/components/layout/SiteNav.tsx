@@ -13,6 +13,7 @@ const secondaryLinks = [
   { href: "/", label: "교육개요" },
   { href: "/notice", label: "FAQ" },
   { href: "/lesson", label: "LESSON" },
+  { href: "/ledger", label: "가계부" },
 ] as const;
 
 const linkCls =
